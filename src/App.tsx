@@ -78,7 +78,7 @@ function App() {
               }
         }
       };
-      getUserMetadata();
+     if (isAuthenticated) getUserMetadata();
 },[isAuthenticated]);
 
   

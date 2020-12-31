@@ -1,11 +1,10 @@
 {
   "name": "website2",
-  "version": "0.1.0",
+  "version": "1.0.2",
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^1.2.0",
     "github-api": "^3.3.0",
-    "materialize-css": "^1.0.0-rc.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
