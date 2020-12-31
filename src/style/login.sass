@@ -1,0 +1,102 @@
+//Author: osorina irina
+//Source: https://codepen.io/osorina/pen/PQdMOO
+.content 
+    top: 40%
+    position: absolute
+    height: fit-content
+    width: 100% 
+    display: flex
+    justify-content: center  
+    align-content: center 
+    align-items: center
+    flex-direction: column
+    &.no-page 
+      > h1 
+          font-family: 'Oswald', sans-serif
+          color: white
+          font-size: clamp(20px,60px,80px)
+          text-shadow: 4px 4px 0px #fc870a
+          user-select: none
+      > p 
+        font-size: clamp(10px,25px,45px)
+        font-family: 'Lato', sans-serif
+        color: white
+        user-select: none
+        text-shadow: 4px 4px 0px #fc870a
+    &.main 
+      z-index: 5
+      > h1 
+        font-family: 'Oswald', sans-serif
+        color: white
+        font-size: clamp(10px,50px,70px)
+        text-shadow: 4px 4px 0px #fc870a
+        user-select: none
+    > h2 
+        font-family: 'Oswald', sans-serif
+        text-align: center
+        font-size: clamp(10px,40px,60px)
+        color: white
+        text-shadow: 4px 4px 0px #fc870a
+#login-screen
+  display: table
+  width: 100%
+  height: 100%
+  background-color: #171717
+  color: #000
+  line-height: 1.6
+  position: relative
+  font-family: sans-serif
+  overflow: hidden    
+    
+
+.lines
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  height: 100%
+  margin: auto
+  width: 90vw
+  
+.line
+  position: absolute
+  width: 1px
+  height: 100%
+  top: 0
+  left: 50%
+  background: rgba(255, 255, 255, 0.1)
+  overflow: hidden
+
+  &::after
+    content: ''
+    display: block
+    position: absolute
+    height: 15vh
+    width: 100%
+    top: -50%
+    left: 0
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%)
+    animation: drop 7s 0s infinite
+    animation-fill-mode: forwards
+    animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97)
+  
+  &:nth-child(1)
+    margin-left: -25%
+    &::after
+      animation-delay: 2s
+  
+  &:nth-child(3)
+    margin-left: 25%
+    &::after
+      animation-delay: 2.5s
+  
+    
+@keyframes drop
+  0%
+    top: -50%
+  100%
+    top: 110%
+
+@media (max-width: 520px) 
+    .content 
+        top: 35%

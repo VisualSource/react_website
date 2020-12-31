@@ -1,0 +1,188 @@
+@import base.sass
+@import server.sass
+@import profile.sass
+@import login.sass
+@import home.sass
+
+
+#mobile-nav 
+    user-select: none
+    display: none
+    cursor: pointer
+    color: white
+    align-self: center
+    margin-right: 1rem
+nav#navbar 
+    //#0e5d75
+    background: #ff3e00
+    box-shadow: 0px 4px 3px #0a0a0aa9
+    display: flex 
+    flex-direction: row 
+    justify-content: space-between 
+    z-index: 992
+    > img#logo 
+        align-self: center
+        margin-left: 1rem
+        height: 3rem
+        
+    > ul 
+        display: flex 
+        list-style-type: none
+        > li
+            display: flex 
+            justify-content: center
+            align-content: center 
+            align-items: center
+            > .material-icons 
+                color: white 
+            &:last-child
+                margin-right: 1rem 
+            > a 
+                cursor: pointer
+                text-decoration: none 
+                margin-left: 1rem
+                text-transform: uppercase 
+                color: white
+                padding: 2px 3px
+                display: flex
+                &.logo-hover 
+                    &>span:hover 
+                        transition:  0.5s
+                        color: #1a1a1aac
+                &.default-hover
+                    &:hover 
+                        transition:  0.5s
+                        background-color: #1a1a1aac
+                        border-radius: 3px 
+.project-bg-shadow 
+    box-shadow: 8px 4px 1px #0a0a0aa9
+.project-text 
+    cursor: pointer
+    user-select: none
+    display: flex 
+    flex-direction: column 
+    justify-content: center
+    font-size: 40px
+    margin: auto
+    z-index: 1
+    color: #fff
+    font-weight: 600
+    padding: 1rem 3rem
+    border-radius: 5px
+.carousel-card 
+    display: flex 
+    height: 100%
+    flex-direction: column
+    justify-content: center 
+    align-content: center
+    align-items: center
+.sidenav-overlay
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    opacity: 0
+    height: 120vh
+    background-color: rgba(0,0,0,0.5)
+    z-index: 997
+    display: none
+    &::before, &::after
+        box-sizing: inherit
+ul#slide-out
+    transition: 0.5s
+    overflow-x: hidden
+    margin: 0  
+    padding: 0
+    list-style: none
+    list-style-type: none
+    z-index: 999 
+    position: absolute 
+    top: 0 
+    left: 0 
+    width: 0
+    background: white
+    height: 100vh
+    > li 
+        float: none
+        line-height: 48px
+        display: flex 
+        padding: 8px 4px
+        cursor: pointer
+        > a 
+            width: 100%
+            user-select: none
+            margin-left: 1rem
+            text-decoration: none
+            color: black
+        &.active:hover , &.active:active
+            transition: 0.2s 
+            background: #3d3d3da4
+        &:first-child
+            font-size: 16px
+            padding: 0
+            height: 180px
+
+.user-view
+    color: white
+    width: 100%
+    position: relative
+    padding: 32px 32px 0
+    margin-bottom: 8px
+    display: flex 
+    flex-direction: column
+    > a 
+        line-height: 20px
+        &::after,&::before
+            box-sizing: inherit
+        padding: 0
+
+    > .background
+        background: #a30909
+        overflow: hidden
+        position: absolute 
+        top: 0 
+        right: 0 
+        bottom: 0 
+        left: 0
+        z-index: -1
+.subheader 
+    color: darkgray !important  
+.divider 
+    width: 100%
+    margin: 8px 0 0 0
+    height: 1px
+    overflow: hidden
+    background-color: #e0e0e0
+    &::before,&::after
+        box-sizing: inherit
+        
+.loader            
+    height: 100% 
+    display: flex   
+
+.markdown-content
+    background: white
+    overflow-y: scroll
+    width: 95%
+    height: 65%
+    padding: 1rem 
+    margin: 0 4rem
+    box-shadow: 8px 4px 1px #0a0a0aa9
+    scrollbar-width: thin    
+    webkit-scrollbar-width: thin 
+    
+#project 
+    height: 100%
+    display: flex 
+    flex-direction: column
+    justify-content: center 
+    align-items: center
+    align-content: center
+
+@media (max-width: 520px) 
+    nav#navbar > ul 
+        display: none
+    #mobile-nav 
+        display: flex
+    .message-side 
+        width: 100px

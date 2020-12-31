@@ -1,17 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import {Auth0Provider} from '@auth0/auth0-react';
+import { BrowserRouter as Router,} from 'react-router-dom';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-
+import './style/index.sass';
+import CONFIG from './config.json';
+import CheckContent from './access/check_content';
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Auth0Provider 
+  domain={CONFIG.auth.domain}
+  clientId={CONFIG.auth.clientId}
+  audience={CONFIG.auth.audience}
+  scope="update:connection update:current_user read:current_user update:users_app_metadata update:users update:current_user_metadata read:users_app_metadata read:user_metadata"
+  redirectUri={window.location.origin}>
+      <React.StrictMode>
+          <Router>
+            <App />
+          </Router>
+      </React.StrictMode>
+  </Auth0Provider>,
   document.getElementById('root')
 );
+CheckContent();
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+
+
+
+

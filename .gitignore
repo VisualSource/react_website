@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/src/config.json
+/server/vendor 
+/server/bin
+/serve/src/auth 
+/server/old_src

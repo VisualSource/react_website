@@ -1,0 +1,39 @@
+.so-button.so-button-primary
+    background: #ff3e00
+.so-checkinput-checked i.so-checkinput-radio.so-checkinput-indicator
+    border-color:#ff3e00
+    &::after
+        background: #ff3e00
+#user-profile 
+    color: white
+    overflow-y: hidden
+    scrollbar-width: thin    
+    webkit-scrollbar-width: thin 
+    display: flex
+    flex-direction: row
+    height: 100% 
+    justify-content: space-around 
+    align-content: center 
+    align-items: center
+    > #info 
+        > h1 
+            font-size: clamp(40px,50px,70px)
+        > div
+            > div.so-button-group
+                display: flex
+                > button.so-button.so-button-primary.so-button-small
+                    display: flex 
+                    justify-content: center 
+                    align-items: center 
+                    align-content: center
+                    > span 
+                        margin-right: 5px
+                    
+
+
+@media (max-width: 520px) 
+    .modal-sizing 
+        width: 100% !important
+    #user-profile 
+        overflow-y: scroll
+        flex-direction: column-reverse

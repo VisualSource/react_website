@@ -1,0 +1,21 @@
+{
+    "require": {
+        "google/apiclient": "^2.7",
+        "xpaw/php-minecraft-query": "^4.0"
+    },
+    "scripts": {
+        "post-update-cmd": "Google\\Task\\Composer::cleanup"
+    },
+    "autoload": {
+        "autoload": {
+            "psr-4": {
+                "xPaw\\php-minecraft-query\\": "src"
+            }
+        }
+    },
+    "extra": {
+        "google/apiclient-services/php-minecraft-query": [
+            "Compute"
+        ]
+    }
+}

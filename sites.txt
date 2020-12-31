@@ -1,0 +1,6 @@
+https://my-json-server.typicode.com/
+https://shine.wiki/1.6.x/
+https://material.io/resources/icons/?search=code&icon=vpn_key&style=baseline
+
+https://github.com/firebase/php-jwt
+https://github.com/googleapis/google-api-php-client

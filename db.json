@@ -1,0 +1,31 @@
+{
+    "profile":{
+        "version": "1.0.0"
+    },
+    "posts": [
+        {
+            "images":["content/polytopia.webp"],
+            "title": "PolytopiaJs",
+            "repo":"polytopiajs",
+            "text_bg_color": "#0e5d75",
+            "text_shadow": true,
+            "carousel_color": "#0e5d75"
+        },
+        {
+            "images": [],
+            "title": "Villager Expansion",
+            "text_bg_color": "#1b5f3a",
+            "text_shadow": false,
+            "repo":"mc_villager_expansion",
+            "carousel_color": "#1b5f3a"
+        },
+        {
+            "images": [],
+            "title": "Dungeon Quest",
+            "repo":"dungeon_game",
+            "text_bg_color": "#da511b",
+            "text_shadow": false,
+            "carousel_color": "#da511b"
+        }
+    ]
+}
