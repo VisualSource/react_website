@@ -6,6 +6,12 @@ import App from './App';
 import './style/index.sass';
 import CONFIG from './config.json';
 import CheckContent from './access/check_content';
+window.addEventListener('load',()=>{ 
+  try {
+    let get = document.querySelectorAll('div')[1];
+    get.style.display = "none";
+  } catch (_) {}
+});
 ReactDOM.render(
   <Auth0Provider 
   domain={CONFIG.auth.domain}
@@ -22,6 +28,8 @@ ReactDOM.render(
   document.getElementById('root')
 );
 CheckContent();
+
+
 
 
 

@@ -1,0 +1,6 @@
+{
+    "client_id":"3d99S9SHN4SkUI0Fl4F0fzjxaQYs0tfA",
+    "client_secret":"pg_HC1Ao2EUQKXTqih_-vBcuDepRPnjpq93hvUNRsVCZrAaSn3KANFoGvKBHhk22",
+    "audience":"https://visualsource.auth0.com/api/v2/",
+    "grant_type":"client_credentials"
+}

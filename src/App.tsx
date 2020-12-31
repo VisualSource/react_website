@@ -5,6 +5,7 @@ import {
   Switch,
   Route,
   Link,
+  Redirect,
 } from "react-router-dom";
 import CONFIG from './config.json';
 import Server from './pages/Server';
@@ -122,6 +123,9 @@ function App() {
         <Switch>
           <Route exact path="/">
                 <Home/>
+          </Route>
+          <Route path="/index.html">
+                <Redirect to="/"/>
           </Route>
           <Route path="/login">
                 <Login/>
