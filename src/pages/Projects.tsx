@@ -19,8 +19,8 @@ export default function Projects(){
                 try {
                     const data =  await (await fetch(CONFIG.db)).json();
                   
-                    window.localStorage.setItem("projects",JSON.stringify(data.posts));
-                    parse = data.posts;
+                    window.localStorage.setItem("projects",JSON.stringify(data));
+                    parse = data;
                 } catch (error) {
                     console.error(error);
                     setLoading(false);
