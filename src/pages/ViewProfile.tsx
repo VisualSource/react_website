@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {Spin, Image} from 'shineout';
-import {Link, Redirect, useParams} from 'react-router-dom';
-import CONFIG from '../config.json';
+import {Redirect, useParams} from 'react-router-dom';
 
 const UserProfile = () => {
     const [userProfile, setUserProfile] = useState<any>(null);
@@ -12,7 +11,8 @@ const UserProfile = () => {
     useEffect(()=>{
         const getUserMetadata = async () => {
             setLoading(false);
-            //setError(true);
+            setUserProfile(null);
+            setError(false);
         };
         getUserMetadata();
     },[]);

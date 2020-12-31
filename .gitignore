@@ -25,5 +25,5 @@ yarn-error.log*
 /src/config.json
 /server/vendor 
 /server/bin
-/serve/src/auth 
+/server/auth 
 /server/old_src

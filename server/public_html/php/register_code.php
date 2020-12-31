@@ -1,7 +1,7 @@
 <?php 
     header("Access-Control-Allow-Origin: *");
     header('Content-Type: application/json');
-    //error_reporting(E_ALL & ~E_NOTICE);
+    error_reporting(E_ALL & ~E_NOTICE);
     set_include_path('/mnt/c/Webprojects/website2/server/');
     require 'vendor/firebase/php-jwt/src/JWT.php';
 

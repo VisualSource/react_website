@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import {Button,Spin, Image, Modal, Form, Input, Message, Radio} from 'shineout';
-import {Link, Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import CONFIG from '../config.json';
 
-const CodeRules = {
+/*const CodeRules = {
   code: [
     { required: true, message: 'Please enter code.' },
     { min: 25, message: 'Code must be at least {min} characters.' },
     { regExp: /[a-z]+/i, message: 'Password at least has one letter.' },
   ]
-}
+}*/
 
 const Profile = () => {
-  const { user, isAuthenticated, getAccessTokenSilently, loginWithRedirect } = useAuth0();
+  const { user, isAuthenticated, getAccessTokenSilently} = useAuth0();
   const [userMetadata, setUserMetadata] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [showEdit,setShowEdit] = useState(false);
-  const [showCode,setShowCode] = useState(false);
+  //const [showCode,setShowCode] = useState(false);
   const [showCred,setShowCred] = useState(false);
   const [update,setUpdate] = useState(true);
 
@@ -100,7 +100,7 @@ const Profile = () => {
     }
   }
 
-
+/*
   const codeClose = () => {
     setShowCode(false);
   }
@@ -147,7 +147,7 @@ const Profile = () => {
               }
            </div>
   }
-
+*/
   useEffect(()=>{
     const getUserMetadata = async () => {
         let raw = window.sessionStorage.getItem("metadata");
@@ -209,13 +209,17 @@ const Profile = () => {
                       </Form.Item>
                     </Form>
                   </Modal>
-                  <Modal className="modal-sizing" footer={renderCodeFooter()} title="Enter Code" visible={showCode} onClose={codeClose}>
-                    <Form labelWidth={100} rules={CodeRules} labelAlign="right"  style={{ maxWidth: 400 }} onSubmit={handleCodeSubmit}>
-                       <Form.Item required label="Code">
-                          <Input name="code" placeholder="enter a code" type="password"/>
-                       </Form.Item>
-                    </Form>
-                  </Modal>
+                  {
+                    /**
+                     *  <Modal className="modal-sizing" footer={renderCodeFooter()} title="Enter Code" visible={showCode} onClose={codeClose}>
+                          <Form labelWidth={100} rules={CodeRules} labelAlign="right"  style={{ maxWidth: 400 }} onSubmit={handleCodeSubmit}>
+                            <Form.Item required label="Code">
+                                <Input name="code" placeholder="enter a code" type="password"/>
+                            </Form.Item>
+                          </Form>
+                        </Modal>
+                     */
+                  }
                   <Modal className="modal-sizing" footer={renderCredFooter()} title="Edit credentials" visible={showCred} onClose={credClose}>
                     <Form labelWidth={100} labelAlign="right"  style={{ maxWidth: 400 }} onSubmit={submitCred}>
                        <Form.Item required label="New password">

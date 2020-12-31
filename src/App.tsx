@@ -16,7 +16,7 @@ import PrivateRoute from './routes/PrivateRoute';
 import UserProfile from './pages/ViewProfile';
 import Login from './pages/Login';
 function App() {
-  const {isAuthenticated, user, getAccessTokenSilently, logout, loginWithRedirect, isLoading} = useAuth0();
+  const {isAuthenticated, user, getAccessTokenSilently, logout, loginWithRedirect} = useAuth0();
   const [content, setContent] = useState();
   const [show, setShow] = useState(false);
   const sidenav = useRef<HTMLUListElement>(null);
