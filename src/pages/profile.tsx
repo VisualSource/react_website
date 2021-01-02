@@ -34,7 +34,7 @@ const Profile = () => {
            </div>
   }
   const submitCred = async (data: any) => {
-    Message.info(<div>This Feture has not been implemted  yet</div>, 20, {
+    Message.info(<div>This Feture has not been implemted  yet</div>, 8, {
       position: "top-right",
       title: "Customization",
     });
@@ -55,7 +55,7 @@ const Profile = () => {
            </div>
   }
   const submitEdit = async (data: any) => {
-    Message.info(<div>Your changes have been submited</div>, 20, {
+    Message.info(<div>Your changes have been submited</div>, 8, {
       position: "top-right",
       title: "Request Submited",
     });
@@ -78,14 +78,14 @@ const Profile = () => {
 
       const request = await request_update.json();
       if (request?.statusCode) {
-        Message.error(<div>{request.error}</div>, 20, {
+        Message.error(<div>{request.error}</div>, 8, {
           position: "top-right",
           title: "Error in Request",
         });
       }else{
         window.sessionStorage.setItem("metadata",JSON.stringify({user_metadata: request.user_metadata, app_metadata: request.app_metadata}));
         setUserMetadata({user_metadata: request.user_metadata, app_metadata: request.app_metadata});
-        Message.success(<div>Updated Profile</div>, 20, {
+        Message.success(<div>Updated Profile</div>, 8, {
           position: "top-right",
           title: "Updated",
         });
@@ -93,7 +93,7 @@ const Profile = () => {
       
       
     } catch (error) {
-      Message.error(<div>{error.message}</div>, 20, {
+      Message.error(<div>{error.message}</div>, 8, {
         position: "top-right",
         title: "Error in Request",
       });

@@ -63,6 +63,10 @@ export default function Server(){
             });
             setStatus({color: ButtonColor.BAD, loading: false, text: ButtonText.STOP});
           }else{
+            Message.info(<div>{server_data.msg}</div>, 8, {
+              position: "top-right",
+              title: "Server",
+            });
             setStatus({color: server_info.online ? ButtonColor.BAD : ButtonColor.GOOD, loading: false, text: server_info.online ? ButtonText.STOP : ButtonText.START});
           }
         } catch (error) {
@@ -91,21 +95,21 @@ export default function Server(){
           const responce = await request.json();
 
           if (responce.code === 200) {
-            Message.success(<div>The Request has been completed</div>, 20, {
+            Message.success(<div>The Request has been completed</div>, 8, {
               position: "top-right",
               title: "Server",
             });
             fetchServerData();
           }else{
             setStatus({color: server_info.online ? ButtonColor.BAD : ButtonColor.GOOD, loading: false, text: server_info.online ? ButtonText.STOP : ButtonText.START});
-            Message.error(<div>There was an error in the request</div>, 20, {
+            Message.info(<div>{responce.msg}</div>, 8, {
               position: "top-right",
               title: "Server",
             });
           }
         } catch (error) {
           setStatus({color: server_info.online ? ButtonColor.BAD : ButtonColor.GOOD, loading: false, text: server_info.online ? ButtonText.STOP : ButtonText.START});
-          Message.error(<div>There was an error in the request</div>, 20, {
+          Message.error(<div>There was an error in the request</div>, 8, {
             position: "top-right",
             title: "Server",
           });

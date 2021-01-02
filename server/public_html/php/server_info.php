@@ -2,14 +2,15 @@
     header("Access-Control-Allow-Origin: https://visualsource.000webhostapp.com/");
     header('Content-Type: application/json');
     error_reporting(E_ALL & ~E_NOTICE);
-    require '../../vendor/xpaw/php-minecraft-query/src/MinecraftPing.php';
-    require '../../vendor/xpaw/php-minecraft-query/src/MinecraftPingException.php';
+    require_once '../../vm_control.php';
 
     use xPaw\MinecraftPing;
-	use xPaw\MinecraftPingException;
-	
-	try{
-        $Query = new MinecraftPing('127.0.0.1');//19132
+    use xPaw\MinecraftPingException;
+
+
+    function pingServer(){
+        $config = json_decode(file_get_contents('../../config.json'),true);
+        $Query = new MinecraftPing($config["server_ip"], $config["server_port"]);//19132
 
         $Info = $Query->Query( );
 
@@ -26,7 +27,30 @@
         }
 
         $Query->Close();
-
+    }
+	
+	try{
+        $responce = getStatus();
+        $status = $responce['status'];
+        switch ($status) {
+            case 'PROVISIONING':
+            case 'STAGING': 
+            case 'SUSPENDING':
+            case 'SUSPENDED':
+            case 'REPAIRING':
+            case 'STOPPING':
+                echo json_encode(array("type"=>"info","code"=>208,"msg"=>'Server is in a between states. Please wait.'));
+                break;
+            case 'TERMINATED':
+                echo json_encode(array("type"=>"error","code"=>500,"msg"=>"Server is down"));
+                break;
+            case 'RUNNING': 
+                pingServer();
+                break;
+            default:
+                echo json_encode(array("type"=>"error","code"=>500,"msg"=>"Someing happened."));
+                break;
+        }
 	} catch( MinecraftPingException $e ){
         echo json_encode(array('type'=> 'error', 'code'=> 503, 'msg' => $e->getMessage( ) ));
 	}

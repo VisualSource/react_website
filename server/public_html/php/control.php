@@ -1,14 +1,11 @@
 <?php 
     header("Access-Control-Allow-Origin: https://visualsource.000webhostapp.com/");
     header('Content-Type: application/json');
+    require_once '../../vm_control.php';
     require_once './common.php';
 
     function RequestServer(string $type) {
-        return array(
-            'type'=>'error', 
-            'code'=>501, 
-            'msg'=> 'Not Implemented'
-        );
+        return vmControl($type);
     }
 
 
