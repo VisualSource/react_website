@@ -25,7 +25,8 @@ enum ButtonText{
   STARTING = "Starting",
   STOP = "Stop",
   STOPING = "STOPING",
-  WATING = "Wating.."
+  WATING = "Wating..",
+  ERROR = "Error"
 }
 enum ButtonColor {
   GOOD = "success",
@@ -42,28 +43,70 @@ function PlayerItem(data: any){
       </div>
     )
 }
-
+let timeout = 0;
 export default function Server(){
     const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
     const [userMetadata, setUserMetadata] = useState(null);
     const [content_loading,setContentLoading] = useState(true);
     const [status,setStatus] = useState({color: ButtonColor.WARN, loading: true, text: ButtonText.WATING});
-    const [server_info, setServerInfo] = useState<ServerData>({online: false, host: 'none', players: [], player_count: 0, max_players: 10});
+    const [server_info, setServerInfo] = useState<ServerData>({online: false, host: '35.209.27.81', players: [], player_count: 0, max_players: 10});
 
     const fetchServerData = async () => {
         try {
           const server_data = await (await fetch(`${CONFIG.scipts}server_info.php`)).json();
-          if (server_data.code === 200) {
-            setServerInfo({
-              online: true,
-              host: "127.0.0.1",
-              players: Array.isArray(server_data.players) ? server_data.players : [],
-              player_count: server_data?.player_count ? server_data?.player_count : 0,
-              max_players: server_data?.max_players ? server_data?.max_players : 10
-            });
-            setStatus({color: ButtonColor.BAD, loading: false, text: ButtonText.STOP});
+          if (server_data?.type === "info") {
+            switch (server_data?.data?.vm_status) {
+              case "TERMINATED":{
+                setStatus({color: ButtonColor.GOOD, loading: false, text: ButtonText.START});
+                setServerInfo({
+                  online: false,
+                  host: "35.209.27.81",
+                  players: Array.isArray(server_data?.data?.server?.players) ? server_data?.data?.server?.players : [],
+                  player_count: server_data?.data.server?.current_players ?? 0,
+                  max_players: server_data?.data?.server?.max_players ?? 10
+                });
+                break;
+              }
+              case "SUSPENDED":
+              case "RUNNING":
+                setServerInfo({
+                  online: true,
+                  host: "35.209.27.81",
+                  players: Array.isArray(server_data?.data?.server?.players) ? server_data?.data?.server?.players : [],
+                  player_count: server_data?.data.server?.current_players ?? 0,
+                  max_players: server_data?.data?.server?.max_players ?? 10
+                });
+                setStatus({color: ButtonColor.BAD, loading: false, text: ButtonText.STOP});
+                break;
+              case "STOPPING":
+              case "SUSPENDING":
+              case "REPAIRING":
+              case "PROVISIONING":
+              case "STAGING":
+                setStatus({color: ButtonColor.WARN, loading: true, text: ButtonText.WATING});
+                setTimeout(()=>{
+                  fetchServerData();
+                },3000);
+                break;
+              default:{
+                setStatus({color: ButtonColor.WARN, loading: true, text: ButtonText.WATING});
+                if(timeout < 5){
+                  setTimeout(()=>{
+                    timeout++;
+                    fetchServerData();
+                  },3000);
+                }else{
+                  setStatus({color: ButtonColor.BAD, loading: true, text: ButtonText.ERROR});
+                  Message.error(<div>Can not get server status</div>, 8, {
+                    position: "top-right",
+                    title: "Server",
+                  });
+                }
+                break;
+              }
+            }
           }else{
-            Message.info(<div>{server_data.msg}</div>, 8, {
+            Message.info(<div>{server_data?.msg ?? "There was an error"}</div>, 8, {
               position: "top-right",
               title: "Server",
             });
@@ -94,15 +137,15 @@ export default function Server(){
 
           const responce = await request.json();
 
-          if (responce.code === 200) {
-            Message.success(<div>The Request has been completed</div>, 8, {
+          if (responce?.type === "info"){
+            Message.success(<div>{responce?.msg ?? "The request has been accepted."}</div>, 8, {
               position: "top-right",
               title: "Server",
             });
             fetchServerData();
           }else{
             setStatus({color: server_info.online ? ButtonColor.BAD : ButtonColor.GOOD, loading: false, text: server_info.online ? ButtonText.STOP : ButtonText.START});
-            Message.info(<div>{responce.msg}</div>, 8, {
+            Message.error(<div>{responce?.msg ?? "There was an error"}</div>, 8, {
               position: "top-right",
               title: "Server",
             });

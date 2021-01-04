@@ -1,5 +1,5 @@
 {
-    "server_ip": "cryptechcraft.xyz",
-    "server_port": 25565,
-    "can_start": false
+    "server_ip": "35.209.27.81",
+    "server_port": 19132,
+    "can_start": true
 }
