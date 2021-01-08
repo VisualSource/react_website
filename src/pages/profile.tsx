@@ -1,97 +1,135 @@
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import {Button,Spin, Image, Modal, Form, Input, Message, Radio} from 'shineout';
+import {Button,Spin, Image, Modal, Form, Input, Message, Radio, Upload} from 'shineout';
 import {Redirect} from 'react-router-dom';
 import CONFIG from '../config.json';
-
-/*const CodeRules = {
-  code: [
-    { required: true, message: 'Please enter code.' },
-    { min: 25, message: 'Code must be at least {min} characters.' },
-    { regExp: /[a-z]+/i, message: 'Password at least has one letter.' },
-  ]
-}*/
+interface UserEdit {
+  name: string;
+  nickname: string;
+  picture: string;
+  email: string;
+  color: string;
+}
 
 const Profile = () => {
   const { user, isAuthenticated, getAccessTokenSilently} = useAuth0();
   const [userMetadata, setUserMetadata] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [showEdit,setShowEdit] = useState(false);
-  //const [showCode,setShowCode] = useState(false);
+  const [showCode,setShowCode] = useState(false);
   const [showCred,setShowCred] = useState(false);
   const [update,setUpdate] = useState(true);
 
-  const credClose = () => {
-    setShowCred(false);
+  const fetchUserMetaData = async (response: any = undefined) => {
+    let token = null;
+    if(!response){
+      try {
+        const accessToken = await getAccessTokenSilently({
+          audience: CONFIG.auth.audience,
+          scope: "read:current_user read:users_app_metadata read:user_metadata",
+        });
+        token = accessToken;
+        const metadata = await fetch(`${CONFIG.auth.audience}users/${user.sub}`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        response = await metadata.json();
+      } catch (error) {
+        throw error;
+      }
+    }
+
+    window.sessionStorage.setItem("metadata",JSON.stringify({app_metadata: response.app_metadata, user_metadata: response.user_metadata} as any));
+    setUserMetadata(response);
+
+    return token;
   }
-  const renderCredFooter = () =>{
+
+  const toggleClose = (callback: (param: boolean)=>void) => {
+      return () => callback(false);
+  }
+
+  const closeModalFooter = (callback: ()=>void, submit: string = "Submit") => {
     return <div>
-              <Button onClick={credClose}>Cancel</Button>
-              {
-                //@ts-ignore
-                <Modal.Submit>Submit</Modal.Submit>
-              }
-           </div>
+              <Button onClick={callback}>Cancel</Button>
+              <Modal.Submit>{submit}</Modal.Submit>
+          </div>
   }
+
   const submitCred = async (data: any) => {
     Message.info(<div>This Feture has not been implemted  yet</div>, 8, {
       position: "top-right",
       title: "Customization",
     });
-    credClose();
+    toggleClose(setShowCred)();
   }
 
-
-  const editClose = () => {
-    setShowEdit(false);
-  }
-  const renderEditFooter = () =>{
-    return <div>
-              <Button onClick={editClose}>Cancel</Button>
-              {
-                //@ts-ignore
-                <Modal.Submit>Submit</Modal.Submit>
-              }
-           </div>
-  }
-  const submitEdit = async (data: any) => {
+  const submitEdit = async (data: UserEdit) => {
     Message.info(<div>Your changes have been submited</div>, 8, {
       position: "top-right",
       title: "Request Submited",
     });
-    editClose();
+    toggleClose(setShowEdit)();
+    // remove keys that are the same as the current
+    Object.keys(data).forEach((value=>{
+      if(user[value] && user[value] === (data as any)[value]){
+          delete (data as any)[value];
+      } 
+    }));
+    // move color into user_metadata
+    let color = {};
+    if(data["color"] !== userMetadata.user_metadata.color){
+        (color as any)["user_metadata"] = {};
+        (color as any)["user_metadata"]["color"] = data["color"];
+        delete (data as any)["color"];
+    }else{
+      delete (data as any)["color"];
+    }
+
     try {
-      
       const accessToken = await getAccessTokenSilently({
         audience: CONFIG.auth.audience,
-        scope: "update:connection update:users update:current_user update:users_app_metadata",
+        scope: "update:users update:users_app_metadata update:current_user_metadata",
       });
 
-      const request_update = await fetch(`${CONFIG.auth.audience}users/${user.sub}`,{
-        method: "PATCH",
-        body: JSON.stringify({user_metadata: {color: data.color}}),
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
+      if((color as any)?.user_metadata){
+        const request_update = await fetch(`${CONFIG.auth.audience}users/${user.sub}`,{
+          method: "PATCH",
+          body: JSON.stringify(color),
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          }
+        });
+        const request = await request_update.json();
+        if (request?.statusCode) {
+          throw new Error(request.error);
+        }else{
+          await fetchUserMetaData(request);
+          Message.success(<div>Updated Profile</div>, 8, {
+            position: "top-right",
+            title: "Updated",
+          });
         }
-      });
+     }
 
-      const request = await request_update.json();
-      if (request?.statusCode) {
-        Message.error(<div>{request.error}</div>, 8, {
-          position: "top-right",
-          title: "Error in Request",
-        });
+     if(Object.keys(data).length !== 0){
+      const update_user = await fetch(`${CONFIG.scipts}/user_update.php`,{
+        method:"POST",
+        body: JSON.stringify({sub: user.sub, token: accessToken, profile: data})
+      });
+      const user_update_request = await update_user.json();
+
+      if(user_update_request.type === "info"){
+          Message.success(<div>Updated Profile</div>, 8, {
+            position: "top-right",
+            title: "Updated",
+          });
       }else{
-        window.sessionStorage.setItem("metadata",JSON.stringify({user_metadata: request.user_metadata, app_metadata: request.app_metadata}));
-        setUserMetadata({user_metadata: request.user_metadata, app_metadata: request.app_metadata});
-        Message.success(<div>Updated Profile</div>, 8, {
-          position: "top-right",
-          title: "Updated",
-        });
+       throw new Error(user_update_request.msg);
       }
-      
-      
+     }
     } catch (error) {
       Message.error(<div>{error.message}</div>, 8, {
         position: "top-right",
@@ -99,55 +137,42 @@ const Profile = () => {
       });
     }
   }
-
-/*
-  const codeClose = () => {
-    setShowCode(false);
-  }
-  const handleCodeSubmit = async (data: any) => {
-    codeClose();
-    Message.info(<div>Your code has been submited.</div>, 20, {
+  const handleCodeSubmit = async (data: {code: string}) => {
+    toggleClose(setShowCode)();
+    Message.info(<div>Your code has been submited.</div>, 8, {
       position: "top-right",
       title: "Request Submited",
     });
     try {
       const accessToken = await getAccessTokenSilently({
         audience: CONFIG.auth.audience,
-        scope: "update:users update:users_app_metadata update:current_user_metadata",
+        scope: "read:current_user read:users_app_metadata read:user_metadata",
       });
-      const request = await fetch(`${CONFIG.scipts}register_code.php`,{
+      const code_register = await fetch(`${CONFIG.scipts}/register_code.php`,{
         method:"POST",
-        body: JSON.stringify({ code: data.code, sub: user.sub, token: accessToken })
+        body: JSON.stringify({sub: user.sub, token: accessToken, code: data.code})
       });
-      const response = await request.json();
-      console.log(response);
-      
-      if (response.code === 200) {
-        Message.success(<div>Your code has been registered</div>, 20, {
+
+      const response = await code_register.json();
+     
+      if(response?.type === "info"){
+        await fetchUserMetaData();
+        Message.success(<div>Code Registered</div>, 8, {
           position: "top-right",
-          title: "Register success",
+          title: "Code",
         });
       }else{
-        throw new Error("Failed to register code.");
+        throw new Error(response.msg);
       }
+      
     } catch (error) {
-      Message.error(<div>There was an error</div>, 20, {
+      Message.error(<div>{error.message}</div>, 8, {
         position: "top-right",
         title: "Request",
       });
     }
+  }
 
-  }
-  const renderCodeFooter = () =>{
-    return <div>
-              <Button onClick={codeClose}>Cancel</Button>
-              {
-                //@ts-ignore
-                <Modal.Submit>Submit</Modal.Submit>
-              }
-           </div>
-  }
-*/
   useEffect(()=>{
     const getUserMetadata = async () => {
         let raw = window.sessionStorage.getItem("metadata");
@@ -156,21 +181,7 @@ const Profile = () => {
           setLoading(false);
         }else{
             try {
-                const accessToken = await getAccessTokenSilently({
-                  audience: CONFIG.auth.audience,
-                  scope: "read:current_user read:users_app_metadata read:user_metadata",
-                });
-          
-                const userDetailsByIdUrl = `${CONFIG.auth.audience}users/${user.sub}`;
-          
-                const metadataResponse = await fetch(userDetailsByIdUrl, {
-                  headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                  },
-                });
-                const all = await metadataResponse.json();
-                window.sessionStorage.setItem("metadata",JSON.stringify({app_metadata: all.app_metadata, user_metadata: all.user_metadata} as any));
-                setUserMetadata(all);
+                await fetchUserMetaData();
                 setLoading(false);
                 setUpdate(false);
               } catch (e) {
@@ -185,12 +196,12 @@ const Profile = () => {
   if (!loading){
     if (isAuthenticated){
       return <div id="user-profile">
-                  <Modal className="modal-sizing" footer={renderEditFooter()} title="Edit Profile" visible={showEdit} onClose={editClose}>
+                  <Modal className="modal-sizing" footer={closeModalFooter(toggleClose(setShowEdit),"Save")} title="Edit Profile" visible={showEdit} onClose={toggleClose(setShowEdit)}>
                     <Form onSubmit={submitEdit}>
-                      <Form.Item label="Name">
+                      <Form.Item label="Username">
                           <Input name="name" defaultValue={user.name}/>
                       </Form.Item>
-                      <Form.Item label="Nickname">
+                      <Form.Item label="Name">
                           <Input name="nickname" defaultValue={user.nickname}/>
                       </Form.Item>
                       <Form.Item label="Email">
@@ -209,18 +220,14 @@ const Profile = () => {
                       </Form.Item>
                     </Form>
                   </Modal>
-                  {
-                    /**
-                     *  <Modal className="modal-sizing" footer={renderCodeFooter()} title="Enter Code" visible={showCode} onClose={codeClose}>
-                          <Form labelWidth={100} rules={CodeRules} labelAlign="right"  style={{ maxWidth: 400 }} onSubmit={handleCodeSubmit}>
-                            <Form.Item required label="Code">
-                                <Input name="code" placeholder="enter a code" type="password"/>
-                            </Form.Item>
-                          </Form>
-                        </Modal>
-                     */
-                  }
-                  <Modal className="modal-sizing" footer={renderCredFooter()} title="Edit credentials" visible={showCred} onClose={credClose}>
+                  <Modal className="modal-sizing" footer={closeModalFooter(toggleClose(setShowCode))} title="Enter Code" visible={showCode} onClose={toggleClose(setShowCode)}>
+                    <Form labelWidth={100} labelAlign="right"  style={{ maxWidth: 400 }} onSubmit={handleCodeSubmit}>
+                      <Form.Item required label="Code">
+                          <Input name="code" placeholder="enter a code"/>
+                      </Form.Item>
+                    </Form>
+                  </Modal>
+                  <Modal className="modal-sizing" footer={closeModalFooter(toggleClose(setShowCred))} title="Edit credentials" visible={showCred} onClose={toggleClose(setShowCred)}>
                     <Form labelWidth={100} labelAlign="right"  style={{ maxWidth: 400 }} onSubmit={submitCred}>
                        <Form.Item required label="New password">
                           <Input name="password" placeholder="enter new password" type="password"/>
@@ -241,9 +248,7 @@ const Profile = () => {
                               <span style={{fontSize: "15px"}} className="material-icons">create</span>
                               Edit
                             </Button>
-                           {
-                             // <Button onClick={()=>{setShowCode(true)}}><span style={{fontSize: "15px"}} className="material-icons">build</span>Enter Code</Button>
-                           }
+                            <Button onClick={()=>{setShowCode(true)}}><span style={{fontSize: "15px"}} className="material-icons">build</span>Enter Code</Button>
                             <Button onClick={()=>{setShowCred(true)}}>
                               <span style={{fontSize: "15px"}} className="material-icons">vpn_key</span>
                               Credentials

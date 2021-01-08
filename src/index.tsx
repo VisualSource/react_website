@@ -11,7 +11,7 @@ ReactDOM.render(
   domain={CONFIG.auth.domain}
   clientId={CONFIG.auth.clientId}
   audience={CONFIG.auth.audience}
-  scope="update:connection update:current_user read:current_user update:users_app_metadata update:users update:current_user_metadata read:users_app_metadata read:user_metadata"
+  scope="update:profile update:users update:users_app_metadata update:current_user_metadata update:current_user read:current_user read:users_app_metadata read:user_metadata"
   redirectUri={window.location.origin}>
       <React.StrictMode>
           <Router>

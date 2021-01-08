@@ -27,3 +27,4 @@ yarn-error.log*
 /server/bin
 /server/auth 
 /server/old_src
+/src/style/*.css

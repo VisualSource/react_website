@@ -1,20 +1,30 @@
 import React, { useEffect, useState } from "react";
 import {Spin, Image} from 'shineout';
 import {Redirect, useParams} from 'react-router-dom';
-
+import CONFIG from '../config.json';
 const UserProfile = () => {
-    const [userProfile, setUserProfile] = useState<any>(null);
+    const [userProfile, setUserProfile] = useState<{name: string, picture: string, sub: string} | null>(null);
     const [loading, setLoading] = useState(true);
     const [errorStatus, setError] = useState(false);
     const {sub} = useParams<{sub: string}>();
 
     useEffect(()=>{
-        const getUserMetadata = async () => {
+        const getUser = async () => {
+            try {
+                const raw = await fetch(`${CONFIG.scipts}/view_profile.php?user=${sub}`);
+                const user = await raw.json();
+                
+                if(!user?.type){
+                    setUserProfile(user);
+                }else{
+                    setError(true);
+                }
+            } catch (error) {
+                setError(true);
+            }
             setLoading(false);
-            setUserProfile(null);
-            setError(false);
         };
-        getUserMetadata();
+        getUser();
     },[]);
   
   if (!loading && !errorStatus ){
@@ -31,7 +41,7 @@ const UserProfile = () => {
             </div>
   }else{
     if (errorStatus){
-        return <Redirect to="/load-fail"/>
+        return <Redirect to="/404"/>
     }else{
         return <div className="loader">
                 <Spin size="54px" name="cube-grid" color="#ff3e00" />
