@@ -1,5 +1,5 @@
 <?php 
-    header("Access-Control-Allow-Origin: http://localhost:3000");
+    header("Access-Control-Allow-Origin: https://visualsource.000webhostapp.com");
     header('Content-Type: application/json');  
     error_reporting(E_ALL & ~E_NOTICE);
     require_once './common.php';

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import {Button,Spin, Image, Modal, Form, Input, Message, Radio, Upload} from 'shineout';
 import {Redirect} from 'react-router-dom';
-import CONFIG from '../config.json';
+import CONFIG from '../../config.json';
 interface UserEdit {
   name: string;
   nickname: string;

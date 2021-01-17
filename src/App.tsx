@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
-import {Image} from 'shineout';
+import { Image } from 'shineout';
 import {
   Switch,
   Route,
@@ -8,14 +8,15 @@ import {
   Redirect,
 } from "react-router-dom";
 import CONFIG from './config.json';
-import Server from './pages/Server';
+import Server from './pages/services/Server';
 import Home from './pages/home';
-import Projects from './pages/Projects';
-import Project from './pages/Project';
-import Profile from './pages/profile';
+import Projects from './pages/content/Projects';
+import Project from './pages/content/Project';
+import Profile from './pages/account/profile';
 import PrivateRoute from './routes/PrivateRoute';
-import UserProfile from './pages/ViewProfile';
-import Login from './pages/Login';
+import UserProfile from './pages/account/ViewProfile';
+import Login from './pages/account/Login';
+import News from './pages/content/news';
 function App() {
   const {isAuthenticated, user, getAccessTokenSilently, logout, loginWithRedirect} = useAuth0();
   const [content, setContent] = useState();
@@ -82,8 +83,6 @@ function App() {
      if (isAuthenticated) getUserMetadata();
 },[isAuthenticated]);
 
-  
- 
   return (
     <>
       <div ref={overlay} className="sidenav-overlay"></div>
@@ -97,6 +96,7 @@ function App() {
           </div>
         </li>
         <li className="active" onClick={()=>{open(true); }}><Link to="/">Home</Link></li>
+        <li className="active" onClick={()=>{open(true); }}><Link to="/news">News</Link></li>
         <li className="active" onClick={()=>{open(true); }}><Link to="/projects">Projects</Link></li>
         <li><div className="divider"></div></li>
         <li><a className="subheader">User</a></li>
@@ -112,6 +112,7 @@ function App() {
           </span>
           <ul>
             <li><Link className="default-hover" to="/">Home</Link></li>
+            <li><Link className="default-hover" to="/news">News</Link></li>
             <li><Link className="default-hover" to="/projects">Projects</Link></li>
             {((content as any)?.app_metadata?.minecraft_auth) && isAuthenticated ?  <li><Link className="default-hover" to="/minecraft-server">Minecraft</Link></li> : null}
             {isAuthenticated ? <li onClick={logout_user}><a className="default-hover">Logout</a></li> : null}
@@ -138,6 +139,9 @@ function App() {
           </Route>
           <Route path="/user-account/:sub">
               <UserProfile/>
+          </Route>
+          <Route path="/news">
+              <News/>
           </Route>
           <PrivateRoute path="/account">
             <Profile/>

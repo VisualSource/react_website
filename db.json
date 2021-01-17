@@ -2,6 +2,24 @@
     "profile":{
         "version": "1.0.0"
     },
+    "comments":{
+        "website": {
+            "title":"Website",
+            "content":"https://github.com/VisualSource/polytopiajs/blob/master/README.md"
+        },
+        "games":{
+            "title":"Games",
+            "content":"https://github.com/VisualSource/polytopiajs/blob/master/README.md"
+        },
+        "projects":{
+            "title":"Projects",
+            "content":"https://github.com/VisualSource/polytopiajs/blob/master/README.md"
+        },
+        "services":{
+            "title":"Services",
+            "content":"https://github.com/VisualSource/polytopiajs/blob/master/README.md"
+        }
+    },
     "posts": [
         {
             "images":["content/polytopia.webp"],

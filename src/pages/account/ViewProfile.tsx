@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {Spin, Image} from 'shineout';
 import {Redirect, useParams} from 'react-router-dom';
-import CONFIG from '../config.json';
+import CONFIG from '../../config.json';
 const UserProfile = () => {
     const [userProfile, setUserProfile] = useState<{name: string, picture: string, sub: string} | null>(null);
     const [loading, setLoading] = useState(true);

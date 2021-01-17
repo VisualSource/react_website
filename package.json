@@ -7,6 +7,7 @@
     "github-api": "^3.3.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-markdown": "^5.0.3",
     "react-router-dom": "^5.2.0",
     "shineout": "^1.6.2"
   },
@@ -34,19 +35,22 @@
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 safari version",
+      "last 1 ChromeAndroid version",
+      "last 1 FirefoxAndroid version",
+      "last 1 iOS version"
     ]
   },
   "devDependencies": {
     "@rescripts/cli": "0.0.15",
     "@rescripts/rescript-use-babel-config": "0.0.10",
     "@rescripts/rescript-use-rewire": "0.0.6",
-    "@testing-library/jest-dom": "^5.11.8",
+    "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.0",
     "@types/jest": "^26.0.20",
     "@types/materialize-css": "^1.0.8",
-    "@types/node": "^12.19.12",
+    "@types/node": "^12.19.14",
     "@types/react": "^16.14.2",
     "@types/react-dom": "^16.9.10",
     "@types/react-router-dom": "^5.1.7",

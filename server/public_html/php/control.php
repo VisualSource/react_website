@@ -1,5 +1,5 @@
 <?php 
-    header("Access-Control-Allow-Origin: https://visualsource.000webhostapp.com/");
+    header("Access-Control-Allow-Origin: https://visualsource.000webhostapp.com");
     header('Content-Type: application/json');
     error_reporting(E_ALL & ~E_NOTICE);
     require_once '../../vm_control.php';

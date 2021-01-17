@@ -3,7 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import {Redirect} from 'react-router-dom';
 import { Spin, Button, CardGroup, Message } from 'shineout';
 import {Link} from 'react-router-dom';
-import CONFIG from '../config.json';
+import CONFIG from '../../config.json';
 
 
 

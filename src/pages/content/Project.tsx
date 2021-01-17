@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import {Spin} from 'shineout';
-import CONFIG from '../config.json';
+import CONFIG from '../../config.json';
 
-import {Markdown} from '../access/github';
-import "../style/markdown.css"
+import {Markdown} from '../../access/github';
+import "../../style/markdown.css"
 
 
 export default function Project(){
@@ -32,7 +32,8 @@ export default function Project(){
                 let raw = window.localStorage.getItem("projects"); 
                 if (raw == null) {
                     try {
-                        const data =  await (await fetch(CONFIG.db)).json();
+                        //TODO: make sure if times out or something this "projects" needs not to be set.
+                        const data = await (await fetch(CONFIG.db)).json();
                       
                         window.localStorage.setItem("projects",JSON.stringify(data.posts));
                         setDesc(data.posts[Number(id)]);

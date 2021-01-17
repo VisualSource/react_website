@@ -1,7 +1,7 @@
 import React, {useEffect,useState} from 'react';
 import { Carousel, Spin} from 'shineout';
 import {useHistory} from 'react-router-dom';
-import CONFIG from '../config.json';
+import CONFIG from '../../config.json';
 
 export default function Projects(){
     const [loading, setLoading] = useState(true);
