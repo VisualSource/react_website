@@ -1,23 +1,24 @@
 import React,{useEffect,useState} from 'react';
-import ReactMarkdown from 'react-markdown'
+import {NewsMarkdown} from '../../access/github';
+import ReactHtmlParser from 'react-html-parser';
 import {Spin} from 'shineout';
 import {useLocation} from 'react-router-dom';
 const test_data = {
     "website": {
         "title":"Website",
-        "content":"https://raw.githubusercontent.com/VisualSource/polytopiajs/master/README.md"
+        "content":"website"
     },
     "games":{
         "title":"Games",
-        "content":"https://raw.githubusercontent.com/VisualSource/polytopiajs/master/README.md"
+        "content":"games"
     },
     "projects":{
         "title":"Projects",
-        "content":"https://raw.githubusercontent.com/VisualSource/polytopiajs/master/README.md"
+        "content":"projects"
     },
     "services":{
         "title":"Services",
-        "content":"https://raw.githubusercontent.com/VisualSource/polytopiajs/master/README.md"
+        "content":"services"
     }
 }
 
@@ -27,7 +28,7 @@ export default function News(){
     const [viewing,setViewing] = useState<string>("website");
     const [pages, setPages] = useState(test_data);
     const [loading,setLoading] = useState<boolean>(true);
-    const [markdown,setMarkdown] = useState<string>("");
+    const [markdown,setMarkdown] = useState<string>("<h1>Error - No content</h1>");
     useEffect(()=>{
         const load = async() => {
             const search = new URLSearchParams(loc.search.split("?")[1]);
@@ -36,8 +37,9 @@ export default function News(){
             }
 
             try {
-                const raw = await fetch((pages as any)[viewing].content);
-                //setMarkdown(await raw.text());
+                const raw = await NewsMarkdown(viewing);
+                console.log(raw);
+                setMarkdown(raw.data);
                 setLoading(false);
             } catch (error) {
                 console.error(error);
@@ -59,8 +61,8 @@ export default function News(){
 
     return (
         <div id="news">
-            <div>
-               <ReactMarkdown children={markdown}/>
+            <div className="news-markdown markdown-body">
+               {ReactHtmlParser(markdown)}
             </div>
             <aside className="options">
                 <div>Website</div>
@@ -72,73 +74,3 @@ export default function News(){
     );
 }
 
-/**
- * 
- *  <h1>Website News</h1>
-                <hr/> 
-                <div>
-                    <h2>Update 1.4.6</h2>
-                    <summary>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe iure laboriosam possimus dolorem, cupiditate veniam similique sapiente quaerat libero commodi? Aspernatur iste temporibus aliquid repudiandae sit? Voluptatum ducimus iste beatae.</summary>
-                    <hr/>
-                    <div>
-                        <h4>Fixes</h4>
-                        <ul>
-                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</li>
-                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</li>
-                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <hr/>
-                        <h4>Changes</h4>
-                        <ul>
-                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</li>
-                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</li>
-                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <hr/>
-                        <h4>New</h4>
-                        <ul>
-                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</li>
-                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</li>
-                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</li>
-                        </ul>
-                    </div>
-                </div>
-                <hr/> 
-                <div>
-                    <h2>Update 1.3.6</h2>
-                    <summary>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe iure laboriosam possimus dolorem, cupiditate veniam similique sapiente quaerat libero commodi? Aspernatur iste temporibus aliquid repudiandae sit? Voluptatum ducimus iste beatae.</summary>
-                    <hr/>
-                    <div>
-                        <h4>Fixes</h4>
-                        <ul>
-                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</li>
-                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</li>
-                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <hr/>
-                        <h4>Changes</h4>
-                        <ul>
-                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</li>
-                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</li>
-                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <hr/>
-                        <h4>New</h4>
-                        <ul>
-                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</li>
-                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</li>
-                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</li>
-                        </ul>
-                    </div>
-                </div>
- * 
- * 
- */

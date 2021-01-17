@@ -3,14 +3,18 @@
 ## Update 1.5.6
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe iure laboriosam possimus dolorem, cupiditate veniam similique sapiente quaerat libero commodi? Aspernatur iste temporibus aliquid repudiandae sit? Voluptatum ducimus iste beatae.
 
----
-
 ### `Fixes` 
 - FireFox projects page loading error 
 ### `Changes`
+- changed name and short_name to `VisualSource` in manifest
+- switched logo192.png and logo512.png to correct images
+- change page description in index.html
+- change set theme-color to `#ff3e00` in index.html
+- removed use of dangerouslySetInnerHTML
 - Mobile side menu open button hit area incressed 
 - added build support for safari, ChromeAndroid, FirefoxAndroid, and ios safari
 ### `New` 
+- Add logo480.png to manifest
 - News page
 - Game and Games sub pages
 - News pages markdown content
