@@ -1,3 +1,3 @@
 module.exports = [
-   [ 'use-babel-config','.babelrc']
-];
+   ['use-babel-config', '.babelrc']
+ ];

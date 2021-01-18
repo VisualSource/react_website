@@ -90,8 +90,8 @@ function App() {
         <li>
           <div className="user-view">
             <div className="background"></div>
-            <a><Image width={64} height={64} title="user" src={user?.picture ?? ""} shape="circle"/></a>
-            <a><span>{user?.name ?? ""}</span></a>
+            <a><Image width={64} height={64} title="user" src={user?.picture ?? "https://robohash.org/VisualSourceWebsiteTempUser?bgset=bg2"} shape="circle"/></a>
+            <a><span>{user?.name ?? "Login/Register"}</span></a>
             <a><span>{user?.email ?? ""}</span></a>
           </div>
         </li>
@@ -107,16 +107,24 @@ function App() {
       <header>
         <nav id="navbar">
           <img src={`${CONFIG.root}logo.webp`} alt="logo" id="logo"/>
-          <span className="material-icons" id="mobile-nav" onClick={()=>open()}>
-              menu
-          </span>
+          <span className="material-icons" id="mobile-nav" onClick={()=>open()}>menu</span>
           <ul>
-            <li><Link className="default-hover" to="/">Home</Link></li>
-            <li><Link className="default-hover" to="/news">News</Link></li>
-            <li><Link className="default-hover" to="/projects">Projects</Link></li>
+            <li>
+              <Link className="default-hover" to="/">Home</Link>
+              </li>
+            <li>
+              <Link className="default-hover" to="/news">News</Link>
+              </li>
+            <li>
+              <Link className="default-hover" to="/projects">Projects</Link>
+              </li>
             {((content as any)?.app_metadata?.minecraft_auth) && isAuthenticated ?  <li><Link className="default-hover" to="/minecraft-server">Minecraft</Link></li> : null}
             {isAuthenticated ? <li onClick={logout_user}><a className="default-hover">Logout</a></li> : null}
-            <li><Link className="logo-hover" to={isAuthenticated ? "/account" : "/login"}>{isAuthenticated ? <Image width={23} height={23} shape="circle" title="user picture" src={user.picture}/> : <span className="material-icons">account_circle</span>}</Link></li>
+            <li>
+              <Link className="logo-hover" to={isAuthenticated ? "/account" : "/login"}>
+                {isAuthenticated ? <Image width={23} height={23} shape="circle" title="user picture" src={user.picture}/> : <span className="material-icons">account_circle</span>}
+              </Link>
+            </li>
           </ul>
         </nav>
       </header>

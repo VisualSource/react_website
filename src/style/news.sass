@@ -21,6 +21,14 @@
             text-align: center
 .news-markdown
     color: #EEE
-    margin-right: 2rem
+    display: flex 
+    flex-direction: column
+.custom-border-color
+    &::after
+        background: #ff3e00
+
+@media (max-width: 520px) 
+    #news
+        flex-direction: column-reverse
 
    

@@ -1,74 +1,41 @@
 import React,{useEffect,useState} from 'react';
 import {NewsMarkdown} from '../../access/github';
 import ReactHtmlParser from 'react-html-parser';
-import {Spin} from 'shineout';
-import {useLocation} from 'react-router-dom';
-const test_data = {
-    "website": {
-        "title":"Website",
-        "content":"website"
-    },
-    "games":{
-        "title":"Games",
-        "content":"games"
-    },
-    "projects":{
-        "title":"Projects",
-        "content":"projects"
-    },
-    "services":{
-        "title":"Services",
-        "content":"services"
-    }
-}
+import {Spin, Tabs} from 'shineout';
 
+const hiddenPanel = { display: "none" };
 
 export default function News(){
-    const loc = useLocation();
     const [viewing,setViewing] = useState<string>("website");
-    const [pages, setPages] = useState(test_data);
     const [loading,setLoading] = useState<boolean>(true);
-    const [markdown,setMarkdown] = useState<string>("<h1>Error - No content</h1>");
+    const [markdown,setMarkdown] = useState<string>("<h1>Error - Failed to load content</h1>");
     useEffect(()=>{
         const load = async() => {
-            const search = new URLSearchParams(loc.search.split("?")[1]);
-            if(search.has("q")){
-                setViewing(search.get("q") as string);
-            }
-
             try {
                 const raw = await NewsMarkdown(viewing);
-                console.log(raw);
                 setMarkdown(raw.data);
                 setLoading(false);
             } catch (error) {
-                console.error(error);
+                console.error("There was a loading error");
                 setLoading(false);
             }
-
-
         }
 
         load();
-    },[loc.search, viewing]);
-
-
-    if (loading){
-        return <div className="loader">
-            <Spin size="54px" name="cube-grid" color="#ff3e00" />
-        </div>
-    }
+    },[viewing]);
 
     return (
         <div id="news">
-            <div className="news-markdown markdown-body">
+           { loading ? <div className="loader"><Spin size="54px" name="cube-grid" color="#ff3e00" /></div> : <div className="news-markdown markdown-body">
                {ReactHtmlParser(markdown)}
-            </div>
+            </div>}
             <aside className="options">
-                <div>Website</div>
-                <div>Games</div>
-                <div>Projects</div>
-                <div>Services</div>
+                <Tabs defaultActive="website" border="#ffffff" align={window.innerWidth < 520 ? "right" : "vertical-right"} shape="line" onChange={(key)=>{setLoading(true); setViewing(key) }}>
+                    <Tabs.Panel id="website" style={hiddenPanel} tab="Website"></Tabs.Panel>
+                    <Tabs.Panel id="projects" style={hiddenPanel} tab="Projects"></Tabs.Panel>
+                    <Tabs.Panel id="games" style={hiddenPanel} tab="Games"></Tabs.Panel>
+                    <Tabs.Panel id="services" style={hiddenPanel} tab="Services"></Tabs.Panel>
+                </Tabs>
             </aside>
         </div>
     );
