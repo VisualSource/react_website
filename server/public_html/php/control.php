@@ -2,11 +2,11 @@
     header("Access-Control-Allow-Origin: https://visualsource.000webhostapp.com");
     header('Content-Type: application/json');
     error_reporting(E_ALL & ~E_NOTICE);
-    require_once '../../vm_control.php';
+    //require_once '../../vm_control.php';
     require_once './common.php';
 
     function RequestServer(string $type) {
-        return vmControl($type);
+        return '{"type":"error","code":"503","msg":"Server taken offline | See news"}';//vmControl($type);
     }
 
 

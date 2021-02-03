@@ -2,7 +2,7 @@
     header("Access-Control-Allow-Origin: *");
     header('Content-Type: application/json');
     error_reporting(E_ALL & ~E_NOTICE);
-    require_once '../../vm_control.php';
+   // require_once '../../vm_control.php';
     require_once './common.php';
     function pingServer(){
             $config = json_decode(file_get_contents('../../config.json'),true);
@@ -20,7 +20,8 @@
                 );
             } 
     }
-	try{
+    echo json_encode(array('type'=> 'error', 'code'=> 503, 'msg' => "Server taken offline." ));
+	/*try{
         $responce = getStatus();
         $status = $responce['status'];
 
@@ -48,6 +49,6 @@
         }
 	} catch( \Throwable $e ){
         echo json_encode(array('type'=> 'error', 'code'=> 503, 'msg' => "Unknown error" ));
-	}
+	}*/
 ?>
    
