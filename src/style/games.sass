@@ -1,0 +1,21 @@
+div.games-content 
+    height: 100%
+    display: grid 
+    grid-template-areas: "a b c d e" "f g h i j"  "k l o m p" 
+    > button.btn-right 
+        grid-area: i 
+        align-self: center
+        width: 40px
+        height: 40px
+    > button.btn-left
+        grid-area: g
+        justify-self: flex-end
+        align-self: center
+        width: 40px
+        height: 40px
+    > div.showing-game
+        background: #ffffff
+        box-shadow: 12px 12px 2px 1px #0e0e0e33
+        grid-area: h
+        height: 100%
+        width: 100%

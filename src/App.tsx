@@ -15,6 +15,7 @@ import Project from './pages/content/Project';
 import Profile from './pages/account/profile';
 import PrivateRoute from './routes/PrivateRoute';
 import UserProfile from './pages/account/ViewProfile';
+import Game from './pages/content/game';
 import Login from './pages/account/Login';
 import News from './pages/content/news';
 function App() {
@@ -97,6 +98,7 @@ function App() {
         </li>
         <li className="active" onClick={()=>{open(true); }}><Link to="/">Home</Link></li>
         <li className="active" onClick={()=>{open(true); }}><Link to="/news">News</Link></li>
+        <li className="active" onClick={()=>{open(true); }}><Link to="/games">Games</Link></li>
         <li className="active" onClick={()=>{open(true); }}><Link to="/projects">Projects</Link></li>
         <li><div className="divider"></div></li>
         <li><a className="subheader">User</a></li>
@@ -115,6 +117,9 @@ function App() {
             <li>
               <Link className="default-hover" to="/news">News</Link>
               </li>
+            <li>
+              <Link className="default-hover" to="/games">Games</Link>
+            </li>
             <li>
               <Link className="default-hover" to="/projects">Projects</Link>
               </li>
@@ -150,6 +155,9 @@ function App() {
           </Route>
           <Route path="/news">
               <News/>
+          </Route>
+          <Route path="/games">
+              <Game/>
           </Route>
           <PrivateRoute path="/account">
             <Profile/>
