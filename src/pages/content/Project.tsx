@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import {Spin} from 'shineout';
 import CONFIG from '../../config.json';
+import {fetchContent} from '../../components/LoadStroage';
 import ReactHtmlParser from 'react-html-parser';
 import {Markdown} from '../../access/github';
 import "../../style/markdown.css"
@@ -22,14 +23,15 @@ export default function Project(){
             }
         }
 
-        
         return {backgroundColor: "orange"}
     }
     useEffect(()=>{
-      
-        const loadContent = async () => {
+        const init = async () => {
             try {
-                let raw = window.localStorage.getItem("projects"); 
+                const content = await fetchContent("projects","posts");
+                setDesc(content[Number(id)]);
+
+                /*let raw = window.localStorage.getItem("projects"); 
                 if (raw == null) {
                     try {
                         //TODO: make sure if times out or something this "projects" needs not to be set.
@@ -43,7 +45,7 @@ export default function Project(){
                 }else {
                     setDesc(JSON.parse(raw)[Number(id)])
                 }
-                console.log(desc);
+                console.log(desc);*/
                 
             } catch (error) {
                 console.error(error);
@@ -60,7 +62,7 @@ export default function Project(){
             setIsLoading(false);
 
         }
-        loadContent();
+        init();
         
     },[]);
     if (!isLoading){

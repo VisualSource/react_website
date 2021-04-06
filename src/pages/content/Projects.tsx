@@ -2,6 +2,7 @@ import React, {useEffect,useState} from 'react';
 import { Carousel, Spin} from 'shineout';
 import {useHistory} from 'react-router-dom';
 import CONFIG from '../../config.json';
+import {fetchContent} from '../../components/LoadStroage';
 
 export default function Projects(){
     const [loading, setLoading] = useState(true);
@@ -9,11 +10,18 @@ export default function Projects(){
     const history = useHistory();
 
     useEffect(()=>{
-        const loadContent = async () => {
-
-            let raw = window.localStorage.getItem("projects");
-
+        const init = async () => {
             let parse = [];
+            try {
+                const content = await fetchContent("projects","posts");
+                parse = content;
+            } catch (error) {
+                console.error(error);
+                setLoading(false);
+            }
+           
+
+            /*let raw = window.localStorage.getItem("projects");
 
             if (raw == null) {
                 try {
@@ -28,7 +36,7 @@ export default function Projects(){
             }else{
                 let a = JSON.parse(raw);
                 parse = a;
-            }
+            }*/
 
             setProjects(parse.map(({images, title, carousel_color, text_bg_color, repo, text_shadow}: any, index: number)=>{
                 return <div key={repo} className="carousel-card" style={{ background: carousel_color ?? "#292933", backgroundImage: images[0] ? `url(${images[0]})` : "none", backgroundSize: "100% 100%"}}>
@@ -40,7 +48,7 @@ export default function Projects(){
             setLoading(false);
          
         }
-        loadContent();
+        init();
     },[]);
 
     if (!loading) {

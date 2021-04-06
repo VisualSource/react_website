@@ -26,7 +26,7 @@ async function fetchContent(){
   try {
       const data =  await (await fetch(CONFIG.db)).json();
       window.localStorage.setItem("projects",JSON.stringify(data));
-      setCookie("1.0.0");
+      setCookie("1.1.0");
   } catch (error) {
       console.error("Failed to update content.");
   }
