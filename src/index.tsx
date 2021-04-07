@@ -5,7 +5,7 @@ import { BrowserRouter as Router,} from 'react-router-dom';
 import App from './App';
 import './style/index.sass';
 import CONFIG from './config.json';
-import CheckContent from './access/check_content';
+import {ContentVersionChecker} from './components/LoadStroage';
 ReactDOM.render(
   <Auth0Provider 
   domain={CONFIG.auth.domain}
@@ -21,7 +21,7 @@ ReactDOM.render(
   </Auth0Provider>,
   document.getElementById('root')
 );
-CheckContent();
+ContentVersionChecker();
 
 
 

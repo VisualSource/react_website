@@ -25,7 +25,7 @@ const cookieHandler = {
         const d = new Date();
         d.setTime(d.getTime() + (7*24*60*60*1000));
         const expires = "expires="+ d.toUTCString();
-        document.cookie = "content" + "=" + version + ";" + expires + ";path=/";
+        document.cookie = "content" + "=" + version + ";" + expires + ";SameSite=Lax;path=/";
     }
 }
 
@@ -51,6 +51,7 @@ const cookieHandler = {
  * @param {*} content
  */
 function setContent(item: string, content: any): void{
+    window.localStorage.removeItem(item);
     window.localStorage.setItem(item,JSON.stringify(content));
 }
 
@@ -62,10 +63,14 @@ function setContent(item: string, content: any): void{
 export async function ContentVersionChecker(): Promise<void> {
     const cookie = cookieHandler.getCookie('content');
     if(cookie === null){
-        const content = await loadContent("db");
-        cookieHandler.setCookie(content.profile.version);
-        setContent("projects",content.posts);
-        setContent("games",content.comments);
+        try {
+            const content = await loadContent();
+            cookieHandler.setCookie(content.profile.version);
+            setContent("projects",content.posts);
+            setContent("games",content.comments.games);
+        } catch (error) {
+            console.error(error);
+        }
     }
 }
 

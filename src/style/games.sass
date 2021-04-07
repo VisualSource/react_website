@@ -2,20 +2,60 @@ div.games-content
     height: 100%
     display: grid 
     grid-template-areas: "a b c d e" "f g h i j"  "k l o m p" 
+    > div.sidecard-a
+        justify-self: center 
+        align-self: center
+        grid-area: g
+        width: 85%
+        height: 100%
+        background: darkgray
+        position: relative 
+        left: 4rem
+        top: 1.3rem
+        box-shadow: 8px 8px 2px 1px #0e0e0eb9
+    > div.sidecard-b
+        justify-self: center 
+        align-self: center
+        grid-area: i
+        width: 85%
+        height: 100%
+        background: darkgray 
+        position: relative 
+        left: -4rem
+        top: 1.3rem
+        z-index: 8
+        box-shadow: 8px 8px 2px 1px #0e0e0eb9
     > button.btn-right 
         grid-area: i 
         align-self: center
         width: 40px
         height: 40px
+        z-index: 98
     > button.btn-left
         grid-area: g
         justify-self: flex-end
         align-self: center
         width: 40px
         height: 40px
+        z-index: 98
     > div.showing-game
+        z-index: 99
+        color: white
         background: #ffffff
-        box-shadow: 12px 12px 2px 1px #0e0e0e33
+        box-shadow: 12px 12px 2px 1px #0e0e0eb9
         grid-area: h
         height: 100%
         width: 100%
+        display: flex 
+        flex-direction: column 
+        justify-content: space-between
+        > span
+            background: #949494a4
+            width: fit-content
+        > div.discription 
+            width: 100%
+            color: gray
+            background: #ffffff
+            display: flex 
+            flex-direction: column 
+            align-self: flex-start

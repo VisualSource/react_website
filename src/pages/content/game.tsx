@@ -1,10 +1,13 @@
 import React,{useState, useEffect} from 'react';
 import {Spin} from 'shineout';
 import {fetchContent} from '../../components/LoadStroage';
+import CONFIG from '../../config.json';
+import {Button} from 'shineout';
 interface GameContent {
     title: string;
     description: string;
     route: string;
+    image: string;
 }
 export default function Game(){
     const [isLoading,setLoading] = useState<boolean>(true);
@@ -33,13 +36,21 @@ export default function Game(){
 
     return (
         <div className="games-content">
-            <div className="showing-game"></div>
-            <button onClick={()=>{
+            <div className="sidecard-a"></div>
+            <div className="sidecard-b"></div>
+            <div className="showing-game" style={{backgroundSize: "cover", backgroundImage: `url('${CONFIG.root}${content[showing].image}')`}}>
+                <span>{content[showing].title}</span>
+                <div className="discription">
+                    <span>Play <a href={`${CONFIG.root}${content[showing].route}`}>Here</a></span>
+                    <span>{content[showing].description}</span>
+                </div>
+            </div>
+            <Button className="btn-right" onClick={()=>{
                 if((showing + 1) < content.length) setShowing(showing + 1);
-            }} className="btn-right">{">"}</button>
-            <button onClick={()=>{
+            }}>{">"}</Button>
+            <Button onClick={()=>{
                 if((showing - 1) >= 0) setShowing(showing - 1);
-            }} className="btn-left">{"<"}</button>
+            }} className="btn-left">{"<"}</Button>
         </div>
     );
 }
