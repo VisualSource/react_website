@@ -56,7 +56,7 @@ function setContent(item: string, content: any): void{
 }
 
 /**
- * Check for content updates and 
+ * Check for content updates and load if not.
  *
  * @export
  */

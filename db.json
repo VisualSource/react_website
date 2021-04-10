@@ -9,6 +9,12 @@
                 "description": "A sliding tile puzzle",
                 "route":"games/2048game/index.html",
                 "image": "content/2048.webp"
+            },
+            {
+                "title": "Polytopia",
+                "description": "Polytopia made in JS",
+                "route":"games/polytopia",
+                "image": "content/2048.webp"
             }
         ]
     },

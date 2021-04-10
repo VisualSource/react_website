@@ -3,41 +3,72 @@ div.games-content
     display: grid 
     grid-template-areas: "a b c d e" "f g h i j"  "k l o m p" 
     > div.sidecard-a
+        user-select: none
+        color: white
         justify-self: center 
         align-self: center
         grid-area: g
-        width: 85%
+        width: 100%
         height: 100%
-        background: darkgray
+        background-size: 100% 100%
+        background: url("https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1351&q=80") darkgray
         position: relative 
         left: 4rem
         top: 1.3rem
         box-shadow: 8px 8px 2px 1px #0e0e0eb9
+        filter: blur(3px)
+        display: flex 
+        flex-direction: column
+        justify-content: space-between 
+        > span
+            background: #949494a4
+            width: fit-content
+        > div.discription 
+            display: flex 
+            flex-direction: column
+            width: 100%
+            color: gray
+            background: #ffffff
     > div.sidecard-b
+        user-select: none
+        background-size: cover
+        background: url("https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1351&q=80") darkgray
         justify-self: center 
         align-self: center
         grid-area: i
-        width: 85%
+        width: 100%
         height: 100%
-        background: darkgray 
         position: relative 
         left: -4rem
         top: 1.3rem
         z-index: 8
-        box-shadow: 8px 8px 2px 1px #0e0e0eb9
+        box-shadow: 8px 8px 6px #0e0e0eb9
+        filter: blur(3px)
+        display: flex
+        flex-direction: column
+        justify-content: space-between 
+        > span
+            background: #949494a4
+            width: fit-content
+        > div.discription 
+            display: flex 
+            flex-direction: column
+            width: 100%
+            color: gray
+            background: #ffffff
     > button.btn-right 
         grid-area: i 
         align-self: center
         width: 40px
         height: 40px
-        z-index: 98
+        z-index: 99
     > button.btn-left
         grid-area: g
         justify-self: flex-end
         align-self: center
         width: 40px
         height: 40px
-        z-index: 98
+        z-index: 99
     > div.showing-game
         z-index: 99
         color: white

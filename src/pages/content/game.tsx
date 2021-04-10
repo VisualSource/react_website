@@ -36,9 +36,21 @@ export default function Game(){
 
     return (
         <div className="games-content">
-            <div className="sidecard-a"></div>
-            <div className="sidecard-b"></div>
-            <div className="showing-game" style={{backgroundSize: "cover", backgroundImage: `url('${CONFIG.root}${content[showing].image}')`}}>
+            <div className="sidecard-a">
+                <span>Game</span>
+                <div className="discription">
+                    <span>Play</span>
+                    <span>Photo by Carl Raw on Unsplash</span>
+                </div>
+            </div>
+            <div className="sidecard-b">
+                <span>Game</span>
+                <div className="discription">
+                    <span>Play</span>
+                    <span>Photo by Alexey Savchenko on Unsplash</span>
+                </div>
+            </div>
+            <div className="showing-game" style={{backgroundSize: "100% 100%", backgroundImage: `url('${CONFIG.root}${content[showing].image}')`}}>
                 <span>{content[showing].title}</span>
                 <div className="discription">
                     <span>Play <a href={`${CONFIG.root}${content[showing].route}`}>Here</a></span>

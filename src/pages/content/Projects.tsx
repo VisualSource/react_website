@@ -17,27 +17,8 @@ export default function Projects(){
                 parse = content;
             } catch (error) {
                 console.error(error);
-                setLoading(false);
             }
            
-
-            /*let raw = window.localStorage.getItem("projects");
-
-            if (raw == null) {
-                try {
-                    const data =  await (await fetch(CONFIG.db)).json();
-                  
-                    window.localStorage.setItem("projects",JSON.stringify(data));
-                    parse = data;
-                } catch (error) {
-                    console.error(error);
-                    setLoading(false);
-                }
-            }else{
-                let a = JSON.parse(raw);
-                parse = a;
-            }*/
-
             setProjects(parse.map(({images, title, carousel_color, text_bg_color, repo, text_shadow}: any, index: number)=>{
                 return <div key={repo} className="carousel-card" style={{ background: carousel_color ?? "#292933", backgroundImage: images[0] ? `url(${images[0]})` : "none", backgroundSize: "100% 100%"}}>
                             <div onClick={()=>{history.push(`/projects/${repo}/${index}`);}} 
@@ -51,17 +32,25 @@ export default function Projects(){
         init();
     },[]);
 
-    if (!loading) {
-        return <Carousel interval={5000} animation="slide-y" indicatorPosition="left" indicatorType="line">
-                    <div className="carousel-card" style={{  backgroundImage: `url(${CONFIG.root}/content/projects.webp)` , backgroundSize: "100% 100%"}}>
-                            <div style={{ background: '#ff3e00'}} className={`project-text project-bg-shadow`}>Projects</div>
-                    </div>
-                    {projects}
-                </Carousel>
+    if (loading) {
+        return (
+            <div className="loader">
+                <Spin size="54px" name="cube-grid" color="#ff3e00" />
+            </div>
+        );
     }
 
-    return <div className="loader">
-            <Spin size="54px" name="cube-grid" color="#ff3e00" />
-        </div>
+   
+    return (
+        <Carousel interval={5000} animation="slide-y" indicatorPosition="left" indicatorType="line">
+            <div className="carousel-card" style={{  backgroundImage: `url(${CONFIG.root}/content/projects.webp)` , backgroundSize: "100% 100%"}}>
+                <div style={{ background: '#ff3e00'}} className={`project-text project-bg-shadow`}>Projects</div>
+            </div>
+            {projects}
+        </Carousel>
+    );
+    
+
+   
 }
 
