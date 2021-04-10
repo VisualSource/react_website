@@ -2,7 +2,6 @@ import React,{useState, useEffect} from 'react';
 import {Spin} from 'shineout';
 import {fetchContent} from '../../components/LoadStroage';
 import CONFIG from '../../config.json';
-import {Button} from 'shineout';
 interface GameContent {
     title: string;
     description: string;
@@ -12,12 +11,11 @@ interface GameContent {
 export default function Game(){
     const [isLoading,setLoading] = useState<boolean>(true);
     const [content,setContent] = useState<GameContent[]>([]);
-    const [showing,setShowing] = useState<number>(0);
     useEffect(()=>{
         const init = async ()=>{
            try {
             const data = await fetchContent("games","comments");
-            setContent(data);
+            setContent(data.games);
             setLoading(false);
            } catch (error) {
                setLoading(false);
@@ -36,33 +34,20 @@ export default function Game(){
 
     return (
         <div className="games-content">
-            <div className="sidecard-a">
-                <span>Game</span>
-                <div className="discription">
-                    <span>Play</span>
-                    <span>Photo by Carl Raw on Unsplash</span>
-                </div>
-            </div>
-            <div className="sidecard-b">
-                <span>Game</span>
-                <div className="discription">
-                    <span>Play</span>
-                    <span>Photo by Alexey Savchenko on Unsplash</span>
-                </div>
-            </div>
-            <div className="showing-game" style={{backgroundSize: "100% 100%", backgroundImage: `url('${CONFIG.root}${content[showing].image}')`}}>
-                <span>{content[showing].title}</span>
-                <div className="discription">
-                    <span>Play <a href={`${CONFIG.root}${content[showing].route}`}>Here</a></span>
-                    <span>{content[showing].description}</span>
-                </div>
-            </div>
-            <Button className="btn-right" onClick={()=>{
-                if((showing + 1) < content.length) setShowing(showing + 1);
-            }}>{">"}</Button>
-            <Button onClick={()=>{
-                if((showing - 1) >= 0) setShowing(showing - 1);
-            }} className="btn-left">{"<"}</Button>
+            {
+                content?.map((item,key)=>{
+                    return (
+                        <div className="card" key={key}>
+                            <img src={`${CONFIG.root}${item.image ?? "content/projects.webp"}`} alt="game preview"/>
+                            <div className="container">
+                                <h4><b>{`Title: ${item.title}`}</b></h4>
+                                <p>{`Description: ${item.description}`}</p>
+                                <div>Play game: <a href={`${CONFIG.root}${item.route}`}>Here</a></div>
+                            </div>
+                        </div>
+                    );
+                })
+            }
         </div>
     );
 }

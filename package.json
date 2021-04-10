@@ -1,6 +1,6 @@
 {
   "name": "website2",
-  "version": "1.6.6",
+  "version": "1.6.0",
   "private": true,
   "scripts": {
     "start": "rescripts start",

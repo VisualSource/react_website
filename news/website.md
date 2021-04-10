@@ -1,5 +1,20 @@
 # Website News 
 
+
+## Update 1.6.0: 4/10/2021 
+### `Fixes` 
+
+### `Changes` 
+- projects page no longer uses Shineout Carousel.
+- changed how content is fetch and saved. 
+
+### `News` 
+- Add games page.
+- Added 2048 game.
+
+### `Notes` 
+- Updated dependencies
+
 ## Update 1.5.6: 1/17/2021
 Fixed a few bugs that i found for the android firefox, and add a news page for updates on project,services, and other things. Plan on adding a games page, tho that is for the next version. Finally change somethings for the webapp content. 
 

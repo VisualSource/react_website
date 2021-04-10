@@ -67,7 +67,7 @@ export async function ContentVersionChecker(): Promise<void> {
             const content = await loadContent();
             cookieHandler.setCookie(content.profile.version);
             setContent("projects",content.posts);
-            setContent("games",content.comments.games);
+            setContent("games",content.comments);
         } catch (error) {
             console.error(error);
         }

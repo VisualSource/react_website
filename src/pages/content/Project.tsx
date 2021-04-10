@@ -30,23 +30,6 @@ export default function Project(){
             try {
                 const content = await fetchContent("projects","posts");
                 setDesc(content[Number(id)]);
-
-                /*let raw = window.localStorage.getItem("projects"); 
-                if (raw == null) {
-                    try {
-                        //TODO: make sure if times out or something this "projects" needs not to be set.
-                        const data = await (await fetch(CONFIG.db)).json();
-                      
-                        window.localStorage.setItem("projects",JSON.stringify(data.posts));
-                        setDesc(data.posts[Number(id)]);
-                    } catch (error) {
-                        console.error(error);
-                    }
-                }else {
-                    setDesc(JSON.parse(raw)[Number(id)])
-                }
-                console.log(desc);*/
-                
             } catch (error) {
                 console.error(error);
             }
@@ -56,8 +39,7 @@ export default function Project(){
                 setContent(markdown.data);
             } catch (error) {
                 setContent("<div class=\"no-readme\"><h1>404 - Theres no content to display</h1><div>");
-                console.error(error);
-                
+                console.error(error);   
             }
             setIsLoading(false);
 
