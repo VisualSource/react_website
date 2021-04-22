@@ -2,17 +2,10 @@ div.project-content
     height: 100%
     display: grid 
     gap: 1rem
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))
-    grid-auto-flow: row dense 
-    justify-content: center 
-    align-items: center
-    overflow-y: scroll
-    scrollbar-width: thin 
-    scrollbar-color: dark 
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr))
     > div.card 
         display: flex 
         flex-direction: column
-        width: clamp(50%,85%,95%)
         height: fit-content
         margin: 1rem
         background: #ffffff
@@ -24,6 +17,7 @@ div.project-content
                 width: 100%
                 border-radius: 5px 5px 0 0
         > main 
+            overflow: hidden
             margin-left: 0.4rem
             margin-bottom: 0.5rem
             > div.action-button 

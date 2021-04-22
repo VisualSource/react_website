@@ -1,0 +1,62 @@
+div.sidenav
+    animation: slide 0.5s forwards
+    animation-delay: 0.2s
+    left: -300px
+    display: flex
+    flex-direction: column
+    z-index: 10
+    width: clamp(250px,300px,325px)
+    position: absolute 
+    height: 100vh 
+    background: white
+    > ul 
+        list-style: none
+        padding: 0 
+        > li 
+            cursor: pointer
+            &:hover 
+                background: #d6d6d6
+            padding: 10px 15px 
+            > a 
+                text-decoration: none 
+                color: black
+    > div.profile
+        color: white
+        display: flex 
+        justify-content: center 
+        align-content: center 
+        align-items: center
+        background-image: url("https://images.unsplash.com/photo-1610962427231-9951643a49d1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=968&q=80")
+        background-size: cover
+        height: 125px 
+        width: 100%
+        > div.so-image.so-image-circle
+            justify-self: flex-start
+            margin: 0.5rem
+        > div.info 
+            color: black 
+            display: flex 
+            flex-direction: column
+            > span.username 
+                font-weight: bold
+            > pre.email 
+                color: #ceaf03
+                background-color: #555555
+                border-radius: 3px 
+                padding: 1px 3px
+                text-overflow: fade
+    > span 
+        background-color: #3a3a3a
+        display: flex 
+        justify-content: flex-end
+        > button.sidenav-close 
+            cursor: pointer
+            border: none 
+            height: 20px
+            width: 35px
+            &:active
+                transform: translate(1px,1px)
+
+@keyframes slide 
+    100% 
+        left: 0

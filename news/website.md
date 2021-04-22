@@ -1,9 +1,22 @@
 # Website News 
 
 
+## Update 1.7.0: 4/22/2021 
+### `Fixes` 
+- Fixed projects and game pages layout
+### `Changes`
+- reworked mobile sidenav
+- changed login screen message
+- changed chrome scrollbar style to match with firefox
+### `New` 
+- register option in login screen
+- login screen will redirect to ether login/register page with `force=login` or `force=register`
+
+### `Notes` 
+- none 
 ## Update 1.6.0: 4/10/2021 
 ### `Fixes` 
-
+- none
 ### `Changes` 
 - projects page no longer uses Shineout Carousel.
 - changed how content is fetch and saved. 

@@ -1,6 +1,6 @@
 {
   "name": "website2",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "private": true,
   "scripts": {
     "start": "rescripts start",
@@ -39,7 +39,8 @@
     "react-dom": "^17.0.2",
     "react-html-parser": "^2.0.2",
     "react-router-dom": "^5.2.0",
-    "shineout": "^1.6.2"
+    "shineout": "^1.6.2",
+    "use-between": "^0.0.18"
   },
   "devDependencies": {
     "@rescripts/cli": "^0.0.16",

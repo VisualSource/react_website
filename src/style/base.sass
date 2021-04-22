@@ -1,5 +1,13 @@
-.message-side 
-    width: 240px
+*::-webkit-scrollbar 
+    width: 5px
+*::-webkit-scrollbar-track 
+    background: #272728
+*::-webkit-scrollbar-thumb 
+    background-color: #7b7b7c
+    border-radius: 20px
+*:focus 
+    outline: none
+
 
 html, body 
   --primary-color: #ff3e00
@@ -18,12 +26,16 @@ div#root
 main 
     height: 100%
     width: 100%
+    overflow-y: scroll
+    scrollbar-width: thin 
+    scrollbar-color: dark 
     > div.so-carousel.so-carousel-slide-y.so-carousel-forward
         width: 100%
         height: 100%
+        
+.message-side 
+    width: 240px
 
-*:focus 
-    outline: none
 
 
 

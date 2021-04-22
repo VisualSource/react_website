@@ -2,18 +2,16 @@ div.games-content
     height: 100%
     display: grid 
     gap: 1rem
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))
-    grid-auto-flow: row dense 
-    justify-content: center 
-    align-items: center
-    overflow-y: scroll
-    scrollbar-width: thin 
-    scrollbar-color: dark 
+    margin: 0 auto
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr))   
     > div.card
+        &:only-child
+            width: 400px 
+            height: fit-content
+            align-self: center 
+            justify-self: center
         display: flex 
         flex-direction: column
-        width: 95%
-        height: fit-content
         margin: 1rem
         background: #ffffff
         border-radius: 5px

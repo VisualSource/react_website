@@ -6,6 +6,7 @@
 @import news.sass
 @import games.sass
 @import projects.sass
+@import sidenav.sass
 
 
 #mobile-nav 
@@ -73,25 +74,8 @@ nav#navbar
     font-weight: 600
     padding: 1rem 3rem
     border-radius: 5px
-.carousel-card 
-    display: flex 
-    height: 100%
-    flex-direction: column
-    justify-content: center 
-    align-content: center
-    align-items: center
-.sidenav-overlay
-    position: fixed
-    top: 0
-    left: 0
-    right: 0
-    opacity: 0
-    height: 120vh
-    background-color: rgba(0,0,0,0.5)
-    z-index: 997
-    display: none
-    &::before, &::after
-        box-sizing: inherit
+
+
 ul#slide-out
     transition: 0.5s
     overflow-x: hidden
@@ -126,29 +110,7 @@ ul#slide-out
             padding: 0
             height: 180px
 
-.user-view
-    color: white
-    width: 100%
-    position: relative
-    padding: 32px 32px 0
-    margin-bottom: 8px
-    display: flex 
-    flex-direction: column
-    > a 
-        line-height: 20px
-        &::after,&::before
-            box-sizing: inherit
-        padding: 0
 
-    > .background
-        background: #a30909
-        overflow: hidden
-        position: absolute 
-        top: 0 
-        right: 0 
-        bottom: 0 
-        left: 0
-        z-index: -1
 .subheader 
     color: darkgray !important  
 .divider 
