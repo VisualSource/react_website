@@ -3,6 +3,10 @@
 ## 2048 Game V1.2.0
 * fix restart screen bug
 * changed file path `/2048game/` to `/2048/`
+
+: Click here to [Play](https://visualsource.000webhostapp.com/games/2048/index.html)
+
+
 ## 2048 Game V1.1.0 
   * added a game over screen
   * added a score
