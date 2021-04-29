@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import {Button,Spin, Image, Modal, Form, Input, Message, Radio, Upload} from 'shineout';
+import {Button,Spin, Image, Modal, Form, Input, Message, Radio} from 'shineout';
 import {Redirect} from 'react-router-dom';
-import CONFIG from '../../config.json';
 interface UserEdit {
   name: string;
   nickname: string;
@@ -25,11 +24,11 @@ const Profile = () => {
     if(!response){
       try {
         const accessToken = await getAccessTokenSilently({
-          audience: CONFIG.auth.audience,
+          audience: process.env.REACT_APP_AUTH0_AUDIENCE,
           scope: "read:current_user read:users_app_metadata read:user_metadata",
         });
         token = accessToken;
-        const metadata = await fetch(`${CONFIG.auth.audience}users/${user.sub}`, {
+        const metadata = await fetch(`${process.env.REACT_APP_AUTH0_AUDIENCE}users/${user.sub}`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
@@ -89,12 +88,12 @@ const Profile = () => {
 
     try {
       const accessToken = await getAccessTokenSilently({
-        audience: CONFIG.auth.audience,
+        audience: process.env.REACT_APP_AUTH0_AUDIENCE,
         scope: "update:users update:users_app_metadata update:current_user_metadata",
       });
 
       if((color as any)?.user_metadata){
-        const request_update = await fetch(`${CONFIG.auth.audience}users/${user.sub}`,{
+        const request_update = await fetch(`${process.env.REACT_APP_AUTH0_AUDIENCE}users/${user.sub}`,{
           method: "PATCH",
           body: JSON.stringify(color),
           headers: {
@@ -115,7 +114,7 @@ const Profile = () => {
      }
 
      if(Object.keys(data).length !== 0){
-      const update_user = await fetch(`${CONFIG.scipts}/user_update.php`,{
+      const update_user = await fetch(`${process.env.REACT_APP_SERVER_SCRIPTS}/user_update.php`,{
         method:"POST",
         body: JSON.stringify({sub: user.sub, token: accessToken, profile: data})
       });
@@ -145,10 +144,10 @@ const Profile = () => {
     });
     try {
       const accessToken = await getAccessTokenSilently({
-        audience: CONFIG.auth.audience,
+        audience: process.env.REACT_APP_AUTH0_AUDIENCE,
         scope: "read:current_user read:users_app_metadata read:user_metadata",
       });
-      const code_register = await fetch(`${CONFIG.scipts}/register_code.php`,{
+      const code_register = await fetch(`${process.env.REACT_APP_SERVER_SCRIPTS}/register_code.php`,{
         method:"POST",
         body: JSON.stringify({sub: user.sub, token: accessToken, code: data.code})
       });

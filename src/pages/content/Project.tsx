@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import {Spin} from 'shineout';
-import CONFIG from '../../config.json';
-import {fetchContent} from '../../components/LoadStroage';
+import {fetchContent} from '../../api/LoadStorage';
 import ReactHtmlParser from 'react-html-parser';
-import {Markdown} from '../../access/github';
+import {Markdown} from '../../api/Github';
 import "../../style/markdown.css"
 
 
@@ -17,7 +16,7 @@ export default function Project(){
     const getStyle = () => {
         if (desc) {
             if (desc?.images[0]){
-                return {backgroundColor: "orange", backgroundImage: `url(${CONFIG.root}${desc.images[0]})` ,backgroundSize:"100% 100%"};
+                return {backgroundColor: "orange", backgroundImage: `url(${process.env.REACT_APP_ROOT}${desc.images[0]})` ,backgroundSize:"100% 100%"};
             }else{
                 return {backgroundColor: desc?.carousel_color ?? "orange"}
             }

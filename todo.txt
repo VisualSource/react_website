@@ -1,0 +1,2 @@
+- implment friend system
+- make srivce page (replass Minecraft page)

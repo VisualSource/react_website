@@ -1,7 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import {Spin} from 'shineout';
-import {fetchContent} from '../../components/LoadStroage';
-import CONFIG from '../../config.json';
+import {fetchContent} from '../../api/LoadStorage';
 interface GameContent {
     title: string;
     description: string;
@@ -38,11 +37,11 @@ export default function Game(){
                 content?.map((item,key)=>{
                     return (
                         <div className="card" key={key}>
-                            <img src={`${CONFIG.root}${item.image ?? "content/projects.webp"}`} alt="game preview"/>
+                            <img src={`${process.env.REACT_APP_ROOT}${item.image ?? "content/projects.webp"}`} alt="game preview"/>
                             <div className="container">
                                 <h4><b>{`Title: ${item.title}`}</b></h4>
                                 <p>{`Description: ${item.description}`}</p>
-                                <div>Play game: <a href={`${CONFIG.root}${item.route}`}>Here</a></div>
+                                <div>Play game: <a href={`${process.env.REACT_APP_ROOT}${item.route}`}>Here</a></div>
                             </div>
                         </div>
                     );

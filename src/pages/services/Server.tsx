@@ -3,10 +3,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 import {Redirect} from 'react-router-dom';
 import { Spin, Button, CardGroup, Message } from 'shineout';
 import {Link} from 'react-router-dom';
-import CONFIG from '../../config.json';
-
-
-
 interface PlayerListData{
    id: string;
    name: string;
@@ -53,7 +49,7 @@ export default function Server(){
 
     const fetchServerData = async () => {
         try {
-          const server_data = await (await fetch(`${CONFIG.scipts}server_info.php`)).json();
+          const server_data = await (await fetch(`${process.env.REACT_APP_SERVER_SCRIPTS}server_info.php`)).json();
           if (server_data?.type === "info") {
             switch (server_data?.data?.vm_status) {
               case "TERMINATED":{
@@ -122,11 +118,11 @@ export default function Server(){
         setStatus({color: ButtonColor.WARN, loading: true, text: ButtonText.WATING});
         try {
           const accessToken = await getAccessTokenSilently({
-            audience: CONFIG.auth.audience,
+            audience: process.env.REACT_APP_AUTH0_AUDIENCE,
             scope: "read:current_user read:users_app_metadata",
           });
 
-          const request = await fetch(`${CONFIG.scipts}control.php`,{
+          const request = await fetch(`${process.env.REACT_APP_SERVER_SCRIPTS}control.php`,{
             method:"POST",
             body: JSON.stringify({
               token: accessToken,
@@ -169,11 +165,11 @@ export default function Server(){
           }else{
               try {
                   const accessToken = await getAccessTokenSilently({
-                    audience: CONFIG.auth.audience,
+                    audience: process.env.REACT_APP_AUTH0_AUDIENCE,
                     scope: "read:current_user read:users_app_metadata read:user_metadata",
                   });
             
-                  const userDetailsByIdUrl = `${CONFIG.auth.audience}users/${user.sub}`;
+                  const userDetailsByIdUrl = `${process.env.REACT_APP_AUTH0_AUDIENCE}users/${user.sub}`;
             
                   const metadataResponse = await fetch(userDetailsByIdUrl, {
                     headers: {

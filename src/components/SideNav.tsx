@@ -2,8 +2,8 @@ import React, { useRef, useEffect } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import { Image } from 'shineout';
 import { Link } from "react-router-dom";
-import UseMetadata from '../access/UseMetadata';
-import {useSharedSideNav} from '../access/UseSideNav';
+import UseMetadata from '../hooks/UseMetadata';
+import {useSharedSideNav} from '../hooks/UseSideNav';
 
 export default function Sidenav(){
     const sidenav = useRef<HTMLDivElement>(null);
@@ -13,6 +13,10 @@ export default function Sidenav(){
     const logout_user = () => {
         window.sessionStorage.removeItem("metadata");
         logout({returnTo: window.location.origin});
+    }
+    const routeTo = (loc: string)=>{
+        open(true);
+        window.location.pathname = loc;
     }
     useEffect(()=>{
         if(sidenav?.current){
@@ -37,23 +41,23 @@ export default function Sidenav(){
                 </div>
             </div>
             <ul>
-                <li onClick={()=>open(true)}><Link to="/">Home</Link></li>
-                <li onClick={()=>open(true)}><Link to="/news">News</Link></li>
-                <li onClick={()=>open(true)}><Link to="/games">Games</Link></li>
-                <li onClick={()=>open(true)}><Link to="/projects">Projects</Link></li>
+                <li onClick={()=>routeTo("/")}><a>Home</a></li>
+                <li onClick={()=>routeTo("/news")}><a>News</a></li>
+                <li onClick={()=>routeTo("/games")}><a>Games</a></li>
+                <li onClick={()=>routeTo("/projects")}><a>Projects</a></li>
                 <li><div className="divider"></div></li>
                 <li><a className="subheader">User</a></li>
                 {
                     isAuthenticated ? (
                         <>
-                            <li className="active" onClick={()=>open(true)}><Link to="/account">Account</Link></li>
-                            {metadata?.app_metadata?.minecraft_auth ? <li className="active" onClick={()=>open(true)}><Link to="/minecraft-server">Minecraft Server</Link></li> : null}
+                            <li className="active" onClick={()=>routeTo("/account")}><a>Account</a></li>
+                            {metadata?.app_metadata?.minecraft_auth ? <li className="active" onClick={()=>routeTo("/minecraft-server")}><a>Minecraft Server</a></li> : null}
                             <li className="active" onClick={logout_user}><a>Logout</a></li>
                         </>
     
                     ) : (
                         <>
-                            <li onClick={()=>loginWithRedirect()} ><a>Login</a></li>
+                            <li onClick={()=>loginWithRedirect()}><a>Login</a></li>
                             <li onClick={()=>loginWithRedirect({screen_hint: "signup"})}><a>Register</a></li>
                         </>
                     )

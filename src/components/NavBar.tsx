@@ -4,9 +4,8 @@ import {
   Link,
 } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import CONFIG from '../config.json';
-import useMetadata from '../access/UseMetadata';
-import {useSharedSideNav} from '../access/UseSideNav';
+import useMetadata from '../hooks/UseMetadata';
+import {useSharedSideNav} from '../hooks/UseSideNav';
 
 export default function NavBar(){
     const {isAuthenticated,logout, user} = useAuth0();
@@ -18,7 +17,7 @@ export default function NavBar(){
     }
     return (
         <nav id="navbar">
-            <img src={`${CONFIG.root}logo.webp`} alt="logo" id="logo"/>
+            <img src={`${process.env.REACT_APP_ROOT}logo.webp`} alt="logo" id="logo"/>
             <span className="material-icons" id="mobile-nav" onClick={()=>open()}>menu</span>
             <ul>
                 <li>
@@ -33,8 +32,14 @@ export default function NavBar(){
                 <li>
                     <Link className="default-hover" to="/projects">Projects</Link>
                 </li>
-                {(metadata?.app_metadata?.minecraft_auth) && isAuthenticated ?  <li><Link className="default-hover" to="/minecraft-server">Minecraft</Link></li> : null }
-                {isAuthenticated ? <li onClick={logout_user}><a className="default-hover">Logout</a></li> : null}
+                {
+                    isAuthenticated ? (
+                        <>
+                            {(metadata?.app_metadata?.minecraft_auth) ? <li><Link className="default-hover" to="/minecraft-server">Services</Link></li> : null}
+                            <li onClick={logout_user}><a className="default-hover">Logout</a></li>
+                        </>
+                    ) : null
+                }
                 <li>
                     <Link className="logo-hover" to={isAuthenticated ? "/account" : "/login"}>
                     {isAuthenticated ? <Image width={23} height={23} shape="circle" title="user picture" src={user.picture}/> : <span className="material-icons">account_circle</span> }

@@ -5,15 +5,15 @@ import {
     Redirect,
   } from "react-router-dom";
   import Server from '../pages/services/Server';
-  import Home from '../pages/home';
+  import Home from '../pages/Home';
   import Projects from '../pages/content/Projects';
   import Project from '../pages/content/Project';
-  import Profile from '../pages/account/profile';
-  import PrivateRoute from '../routes/PrivateRoute';
+  import Profile from '../pages/account/Profile';
+  import PrivateRoute from './PrivateRoute';
   import UserProfile from '../pages/account/ViewProfile';
-  import Game from '../pages/content/game';
+  import Game from '../pages/content/Games';
   import Login from '../pages/account/Login';
-  import News from '../pages/content/news';
+  import News from '../pages/content/News';
 
 export function RouterMain(){
     return (

@@ -1,8 +1,7 @@
 import GitHub from 'github-api';
-import CONFIG from '../config.json';
 
 let instance = new GitHub({
-    token: CONFIG.auth.github
+    token: process.env.REACT_APP_AUTH_GITHUB
 });
 
 export async function NewsMarkdown(page = "webiste") {

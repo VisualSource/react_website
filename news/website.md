@@ -1,5 +1,17 @@
 # Website News 
 
+## Update 1.8.0: 4/28/2021
+### `Fixes` 
+- Sidenav click area on mobile
+### `Changes`
+- organization of project files
+
+### `New` 
+- new home screen animation
+
+### `Notes` 
+- none 
+
 
 ## Update 1.7.0: 4/22/2021 
 ### `Fixes` 
@@ -8,6 +20,7 @@
 - reworked mobile sidenav
 - changed login screen message
 - changed chrome scrollbar style to match with firefox
+- Minecraft Link name to Services
 ### `New` 
 - register option in login screen
 - login screen will redirect to ether login/register page with `force=login` or `force=register`

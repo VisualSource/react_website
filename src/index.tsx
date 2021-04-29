@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import {Auth0Provider} from '@auth0/auth0-react';
 import { BrowserRouter as Router,} from 'react-router-dom';
 import App from './App';
+import {ContentVersionChecker} from './api/LoadStorage';
+
 import './style/index.sass';
-import CONFIG from './config.json';
-import {ContentVersionChecker} from './components/LoadStroage';
 ReactDOM.render(
   <Auth0Provider 
-  domain={CONFIG.auth.domain}
-  clientId={CONFIG.auth.clientId}
-  audience={CONFIG.auth.audience}
+  domain={process.env.REACT_APP_AUTH0_DOMAIN as string}
+  clientId={process.env.REACT_APP_AUTH0_CLIENT_ID as string}
+  audience={process.env.REACT_APP_AUTH0_AUDIENCE}
   scope="update:profile update:users update:users_app_metadata update:current_user_metadata update:current_user read:current_user read:users_app_metadata read:user_metadata"
   redirectUri={window.location.origin}>
       <React.StrictMode>

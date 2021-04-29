@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import {NewsMarkdown} from '../../access/github';
+import {NewsMarkdown} from '../../api/Github';
 import ReactHtmlParser from 'react-html-parser';
 import {Spin, Tabs} from 'shineout';
 

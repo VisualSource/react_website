@@ -1,5 +1,3 @@
-import CONFIG from '../config.json';
-
 type DBSource = "posts" | "profile" | "comments" | "db";
 
 /**
@@ -36,7 +34,7 @@ const cookieHandler = {
  */
  async function loadContent(path: DBSource = "db"): Promise<any> {
     try {
-        const content = await fetch(`${CONFIG.db}/${path}`);
+        const content = await fetch(`${process.env.REACT_APP_JSON_DB}/${path}`);
         const parsed = await content.json();
         return parsed;
     } catch (error) {

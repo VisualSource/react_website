@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
-import CONFIG from '../config.json';
 
 interface Metadata {
     app_metadata: {
@@ -22,11 +21,11 @@ export default function useMetadata(){
                     setMetadata(JSON.parse(raw));
                 }else{
                     const accessToken = await getAccessTokenSilently({
-                        audience: CONFIG.auth.audience,
+                        audience: process.env.REACT_APP_AUTH0_AUDIENCE,
                         scope: "read:current_user read:users_app_metadata read:user_metadata",
                     });
 
-                    const userDetailsByIdUrl = `${CONFIG.auth.audience}users/${user.sub}`;
+                    const userDetailsByIdUrl = `${process.env.REACT_APP_AUTH0_AUDIENCE}users/${user.sub}`;
 
                     const metadataResponse = await fetch(userDetailsByIdUrl, {
                         headers: {

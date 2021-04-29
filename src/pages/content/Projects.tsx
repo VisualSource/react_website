@@ -1,8 +1,7 @@
 import React, {useEffect,useState} from 'react';
 import { Spin, Button } from 'shineout';
 import {useHistory} from 'react-router-dom';
-import {fetchContent} from '../../components/LoadStroage';
-import CONFIG from '../../config.json';
+import {fetchContent} from '../../api/LoadStorage';
 interface Project {
     tags: string[];
     images: string[];
@@ -45,7 +44,7 @@ export default function Projects(){
                    return (
                         <div className="card" key={key}>
                             <header>
-                                <img src={`${CONFIG.root}${value.images[0] ?? "content/projects.webp"}`} alt="project preview"/>
+                                <img src={`${process.env.REACT_APP_ROOT}${value.images[0] ?? "content/projects.webp"}`} alt="project preview"/>
                             </header>
                             <main>
                                 <h3><b>{value.title}</b></h3>

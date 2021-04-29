@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBar from './components/NavBar';
-import {RouterMain} from './routes/RouterMain';
+import {RouterMain} from './components/RouterMain';
 import SideNav from './components/SideNav';
 function App() {
   return (
