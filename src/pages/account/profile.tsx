@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0, User } from "@auth0/auth0-react";
 import {Button,Spin, Image, Modal, Form, Input, Message, Radio} from 'shineout';
 import {Redirect} from 'react-router-dom';
 interface UserEdit {
@@ -28,7 +28,7 @@ const Profile = () => {
           scope: "read:current_user read:users_app_metadata read:user_metadata",
         });
         token = accessToken;
-        const metadata = await fetch(`${process.env.REACT_APP_AUTH0_AUDIENCE}users/${user.sub}`, {
+        const metadata = await fetch(`${process.env.REACT_APP_AUTH0_AUDIENCE}users/${user?.sub}`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
@@ -72,7 +72,7 @@ const Profile = () => {
     toggleClose(setShowEdit)();
     // remove keys that are the same as the current
     Object.keys(data).forEach((value=>{
-      if(user[value] && user[value] === (data as any)[value]){
+      if((user as User)[value] && (user as User)[value] === (data as any)[value]){
           delete (data as any)[value];
       } 
     }));
@@ -93,7 +93,7 @@ const Profile = () => {
       });
 
       if((color as any)?.user_metadata){
-        const request_update = await fetch(`${process.env.REACT_APP_AUTH0_AUDIENCE}users/${user.sub}`,{
+        const request_update = await fetch(`${process.env.REACT_APP_AUTH0_AUDIENCE}users/${user?.sub}`,{
           method: "PATCH",
           body: JSON.stringify(color),
           headers: {
@@ -116,7 +116,7 @@ const Profile = () => {
      if(Object.keys(data).length !== 0){
       const update_user = await fetch(`${process.env.REACT_APP_SERVER_SCRIPTS}/user_update.php`,{
         method:"POST",
-        body: JSON.stringify({sub: user.sub, token: accessToken, profile: data})
+        body: JSON.stringify({sub: user?.sub, token: accessToken, profile: data})
       });
       const user_update_request = await update_user.json();
 
@@ -149,7 +149,7 @@ const Profile = () => {
       });
       const code_register = await fetch(`${process.env.REACT_APP_SERVER_SCRIPTS}/register_code.php`,{
         method:"POST",
-        body: JSON.stringify({sub: user.sub, token: accessToken, code: data.code})
+        body: JSON.stringify({sub: user?.sub, token: accessToken, code: data.code})
       });
 
       const response = await code_register.json();
@@ -198,16 +198,16 @@ const Profile = () => {
                   <Modal className="modal-sizing" footer={closeModalFooter(toggleClose(setShowEdit),"Save")} title="Edit Profile" visible={showEdit} onClose={toggleClose(setShowEdit)}>
                     <Form onSubmit={submitEdit}>
                       <Form.Item label="Username">
-                          <Input name="name" defaultValue={user.name}/>
+                          <Input name="name" defaultValue={user?.name}/>
                       </Form.Item>
                       <Form.Item label="Name">
-                          <Input name="nickname" defaultValue={user.nickname}/>
+                          <Input name="nickname" defaultValue={user?.nickname}/>
                       </Form.Item>
                       <Form.Item label="Email">
-                          <Input name="email" type="email" defaultValue={user.email}/>
+                          <Input name="email" type="email" defaultValue={user?.email}/>
                       </Form.Item>
                       <Form.Item label="Image Url">
-                          <Input name="picture" type="url" defaultValue={user.picture}/>
+                          <Input name="picture" type="url" defaultValue={user?.picture}/>
                       </Form.Item>
                       <Form.Item label="Favorite Colors" tip="select a color">
                         <Radio.Group
@@ -237,9 +237,9 @@ const Profile = () => {
                     </Form>
                   </Modal>
                   <div id="info">
-                      <h1>{user.name}</h1>
+                      <h1>{user?.name}</h1>
                       <hr/>
-                      <p>{user.email}</p>
+                      <p>{user?.email}</p>
                       <div>
                         <p>Color: <span style={{color: userMetadata?.user_metadata?.color ?? "blue"}}>{userMetadata?.user_metadata?.color ?? "blue"}</span></p>
                         <Button.Group size="small" type="primary">
@@ -256,9 +256,9 @@ const Profile = () => {
                       </div>
                   </div>
                   <div>
-                      <Image src={user.picture} shape="circle" width={250} height={250}/>
+                      <Image src={user?.picture} shape="circle" width={250} height={250}/>
                       <hr/>
-                      <code>{user.sub}</code>
+                      <code>{user?.sub}</code>
                   </div>
             </div>
     }else{

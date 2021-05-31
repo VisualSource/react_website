@@ -1,5 +1,17 @@
 # Website News 
 
+## Update 1.9.0 5/30/2021
+
+### `Fixes` 
+- Project Page missing css
+### `Changes`
+- fix polytopiajs project repo
+
+### `New` 
+- Polyscript project
+
+### `Notes` 
+- none 
 ## Update 1.8.0: 4/28/2021
 ### `Fixes` 
 - Sidenav click area on mobile

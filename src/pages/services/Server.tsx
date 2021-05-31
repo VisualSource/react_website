@@ -127,7 +127,7 @@ export default function Server(){
             body: JSON.stringify({
               token: accessToken,
               request_type: server_info.online ? "stop" : "start",
-              sub: user.sub
+              sub: user?.sub
             })
           });
 
@@ -169,7 +169,7 @@ export default function Server(){
                     scope: "read:current_user read:users_app_metadata read:user_metadata",
                   });
             
-                  const userDetailsByIdUrl = `${process.env.REACT_APP_AUTH0_AUDIENCE}users/${user.sub}`;
+                  const userDetailsByIdUrl = `${process.env.REACT_APP_AUTH0_AUDIENCE}users/${user?.sub}`;
             
                   const metadataResponse = await fetch(userDetailsByIdUrl, {
                     headers: {

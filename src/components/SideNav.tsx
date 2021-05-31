@@ -51,7 +51,7 @@ export default function Sidenav(){
                     isAuthenticated ? (
                         <>
                             <li className="active" onClick={()=>routeTo("/account")}><a>Account</a></li>
-                            {metadata?.app_metadata?.minecraft_auth ? <li className="active" onClick={()=>routeTo("/minecraft-server")}><a>Minecraft Server</a></li> : null}
+                            {metadata?.app_metadata?.minecraft_auth ? <li className="active" onClick={()=>routeTo("/minecraft-server")}><a>Services</a></li> : null}
                             <li className="active" onClick={logout_user}><a>Logout</a></li>
                         </>
     

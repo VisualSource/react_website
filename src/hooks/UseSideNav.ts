@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import {useBetween} from 'use-between';
 
 export default function useSideNav(){

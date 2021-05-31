@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import {Spin} from 'shineout';
 import {fetchContent} from '../../api/LoadStorage';
-import ReactHtmlParser from 'react-html-parser';
+import HtmlParser from 'react-html-parser';
 import {Markdown} from '../../api/Github';
 import "../../style/markdown.css"
 
@@ -48,7 +48,7 @@ export default function Project(){
     },[]);
     if (!isLoading){
         return  <div id="project" style={getStyle()}>
-                        <div className="markdown-content markdown-body">{ReactHtmlParser(content)}</div>
+                        <div className="markdown-content markdown-body">{HtmlParser(content)}</div>
                 </div>
     }
     return <div className="loader">

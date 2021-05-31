@@ -42,7 +42,7 @@ export default function NavBar(){
                 }
                 <li>
                     <Link className="logo-hover" to={isAuthenticated ? "/account" : "/login"}>
-                    {isAuthenticated ? <Image width={23} height={23} shape="circle" title="user picture" src={user.picture}/> : <span className="material-icons">account_circle</span> }
+                    {isAuthenticated ? <Image width={23} height={23} shape="circle" title="user picture" src={user?.picture}/> : <span className="material-icons">account_circle</span> }
                     </Link>
                 </li>
             </ul>

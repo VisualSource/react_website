@@ -25,7 +25,7 @@ export default function useMetadata(){
                         scope: "read:current_user read:users_app_metadata read:user_metadata",
                     });
 
-                    const userDetailsByIdUrl = `${process.env.REACT_APP_AUTH0_AUDIENCE}users/${user.sub}`;
+                    const userDetailsByIdUrl = `${process.env.REACT_APP_AUTH0_AUDIENCE}users/${user?.sub}`;
 
                     const metadataResponse = await fetch(userDetailsByIdUrl, {
                         headers: {

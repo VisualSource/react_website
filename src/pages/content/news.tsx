@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react';
 import {NewsMarkdown} from '../../api/Github';
-import ReactHtmlParser from 'react-html-parser';
+import HtmlParser from "react-html-parser";
 import {Spin, Tabs} from 'shineout';
 
 const hiddenPanel = { display: "none" };
@@ -27,7 +27,7 @@ export default function News(){
     return (
         <div id="news">
            { loading ? <div className="loader"><Spin size="54px" name="cube-grid" color="#ff3e00" /></div> : <div className="news-markdown markdown-body">
-               {ReactHtmlParser(markdown)}
+               { HtmlParser(markdown) }
             </div>}
             <aside className="options">
                 <Tabs defaultActive="website" border="#ffffff" align={window.innerWidth < 520 ? "right" : "vertical-right"} shape="line" onChange={(key)=>{setLoading(true); setViewing(key) }}>
