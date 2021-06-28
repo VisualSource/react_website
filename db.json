@@ -1,20 +1,26 @@
 {
     "profile":{
-        "version": "1.4.0"
+        "version": "1.5.0"
     },
     "comments":{
         "games": [
             {
+                "title": "Polytopia Demo",
+                "description": "A web based version of the game polytopia.",
+                "route":"https://game.visualsource.us",
+                "image":"content/polytopia_demo.webp"
+            },
+            {
                 "title": "2048",
                 "description": "A sliding tile puzzle",
-                "route":"games/2048/index.html",
+                "route":"https://visualsource.000webhostapp.com/games/2048/index.html",
                 "image": "content/2048.webp"
             }
         ]
     },
     "posts": [
         {
-            "images":["content/polytopia.webp"],
+            "images":["content/polytopia_demo.webp"],
             "title": "PolytopiaJs",
             "repo":"polytopia",
             "bg_color": "#0e5d75"

@@ -1,5 +1,16 @@
 # Games
 
+
+## Polytopia Demo V0.5.125 
+* Finaly have a demo of a web base polytopia.
+# Features 
+* randomly generated world 
+* movable units
+* attackable units 
+* spawn units 
+* score and stars 
+* turn switching
+
 ## 2048 Game V1.2.0
 * fix restart screen bug
 * changed file path `/2048game/` to `/2048/`

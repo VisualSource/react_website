@@ -41,7 +41,7 @@ export default function Game(){
                             <div className="container">
                                 <h4><b>{`Title: ${item.title}`}</b></h4>
                                 <p>{`Description: ${item.description}`}</p>
-                                <div>Play game: <a href={`${process.env.REACT_APP_ROOT}${item.route}`}>Here</a></div>
+                                <div>Play game: <a href={`${item.route}`}>Here</a></div>
                             </div>
                         </div>
                     );
