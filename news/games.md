@@ -1,5 +1,12 @@
 # Games
 
+## 2048 Game V2.0.0 
+
+Reworked the ui design of the game. 
+Along with the ui changes 
+* Added Scoreboards 
+* Accout login
+* Fixed some bug with the gameover screen
 
 ## Polytopia Demo V0.5.125 
 * Finaly have a demo of a web base polytopia.
