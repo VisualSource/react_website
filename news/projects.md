@@ -4,10 +4,11 @@
 
 Writen the entire runtime for polyscript in rust, so may be able to run it on the web.
 
-# Notable changes 
+#### Notable changes 
 * dropped support for remote imports
 
 View more about the language and documention here [View](/projects/Polyscript)
+
 [Download Page](https://github.com/VisualSource/Polyscript/releases/tag/0.5.1-alpha);
 
 ## Polyscript V0.4.0-Alpha | 5/30/2021

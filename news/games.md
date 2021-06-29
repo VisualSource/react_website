@@ -10,7 +10,7 @@ Along with the ui changes
 
 ## Polytopia Demo V0.5.125 
 * Finaly have a demo of a web base polytopia.
-# Features 
+#### Features 
 * randomly generated world 
 * movable units
 * attackable units 
