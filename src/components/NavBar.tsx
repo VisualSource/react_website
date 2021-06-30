@@ -4,13 +4,11 @@ import {
   Link,
 } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import useMetadata from '../hooks/UseMetadata';
 import {useSharedSideNav} from '../hooks/UseSideNav';
 
 export default function NavBar(){
     const {isAuthenticated,logout, user} = useAuth0();
     const { open } = useSharedSideNav();
-    const metadata = useMetadata();
     const logout_user = () => {
         window.sessionStorage.removeItem("metadata");
         logout({returnTo: window.location.origin});
@@ -32,13 +30,9 @@ export default function NavBar(){
                 <li>
                     <Link className="default-hover" to="/projects">Projects</Link>
                 </li>
+                <li><Link className="default-hover" to="/services">Services</Link></li>
                 {
-                    isAuthenticated ? (
-                        <>
-                            {(metadata?.app_metadata?.minecraft_auth) ? <li><Link className="default-hover" to="/minecraft-server">Services</Link></li> : null}
-                            <li onClick={logout_user}><a className="default-hover">Logout</a></li>
-                        </>
-                    ) : null
+                    isAuthenticated ? (<li onClick={logout_user}><a className="default-hover">Logout</a></li>) : null
                 }
                 <li>
                     <Link className="logo-hover" to={isAuthenticated ? "/account" : "/login"}>

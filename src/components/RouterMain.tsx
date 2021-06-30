@@ -4,16 +4,16 @@ import {
     Route,
     Redirect,
   } from "react-router-dom";
-  import Server from '../pages/services/Server';
-  import Home from '../pages/Home';
-  import Projects from '../pages/content/Projects';
-  import Project from '../pages/content/Project';
-  import Profile from '../pages/account/Profile';
-  import PrivateRoute from './PrivateRoute';
-  import UserProfile from '../pages/account/ViewProfile';
-  import Game from '../pages/content/Games';
-  import Login from '../pages/account/Login';
-  import News from '../pages/content/News';
+import { Services } from "../pages/services/Services";
+import Home from '../pages/Home';
+import Projects from '../pages/content/Projects';
+import Project from '../pages/content/Project';
+import Profile from '../pages/account/Profile';
+import PrivateRoute from './PrivateRoute';
+import UserProfile from '../pages/account/ViewProfile';
+import Game from '../pages/content/Games';
+import Login from '../pages/account/Login';
+import News from '../pages/content/News';
 
 export function RouterMain(){
     return (
@@ -45,9 +45,9 @@ export function RouterMain(){
         <PrivateRoute path="/account">
           <Profile/>
         </PrivateRoute>
-        <PrivateRoute path="/minecraft-server">
-              <Server/>
-        </PrivateRoute>
+        <Route path="/services">
+            <Services/>
+        </Route>
         <Route path="*">
             <div id="login-screen">
                 <div className="lines">

@@ -11,10 +11,3 @@ export default function Home(){
         </>
     );
 }
-/*
-
-    <div className="content main">
-                <h1>VisualSource</h1>
-            </div>
-
-*/

@@ -1,5 +1,19 @@
 # Website News 
 
+## Upate 2.0.0 6/30/2021
+
+### `Fixes` 
+- none
+### `Changes`
+- changed services page
+
+### `New`
+- Polytopia Demo Game
+- 2048 V2.0.0
+
+### `Notes` 
+- none 
+
 ## Update 1.9.0 5/30/2021
 
 ### `Fixes` 
