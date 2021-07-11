@@ -1,5 +1,9 @@
 # Games
 
+## 2048 Game V2.0.1 
+
+Fixed mobile bug where you could not interact with buttons
+
 ## 2048 Game V2.0.0 
 
 Reworked the ui design of the game. 
