@@ -1,0 +1,19 @@
+#vs-projects
+    padding: 10px 0 10px 0
+    height: calc( 100vh - 61.5px )
+    max-height: calc( 100vh - 61.5px )
+    overflow-y: scroll
+    display: grid
+    grid-auto-flow: column
+    grid-template-rows: repeat(3, 1fr)
+    align-items: stretch
+    align-content: start
+    justify-content: center
+    gap: 0.8rem
+
+#project
+    height: calc( 100vh - 61.5px )  
+    overflow-y: scroll
+@media screen and (max-width: 765px)
+    #vs-projects
+        grid-auto-flow: row

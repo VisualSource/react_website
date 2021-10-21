@@ -1,0 +1,9 @@
+{
+    "updated": "9/21/2021 | 1:00 AM",
+    "maps": {
+        "Overworld": "/resources/overworld.webp",
+        "Nether": "/resources/nether.webp",
+        "End": "",
+        "Aether": "/resources/aether.webp"
+    }
+}

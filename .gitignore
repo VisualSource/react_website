@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 
+/server/vendor
+/server/composer.phar
+/server/public_html/games
+
 # testing
 /coverage
 

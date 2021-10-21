@@ -1,0 +1,26 @@
+{
+    "name": "visualsource/backend",
+    "description": "Api for static react webpage",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "VisualSource\\": "api/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Visualsource",
+            "email": "support@visualsource.us"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "2.4",
+        "xpaw/php-minecraft-query": "4.0",
+        "guzzlehttp/guzzle": "^7.3",
+        "firebase/php-jwt": "^5.4"
+    },
+    "scripts": {
+        "start":"php -S localhost:8000 -t ./public_html/ index.php"
+    }
+}

@@ -1,0 +1,43 @@
+#navbarNav 
+    justify-content: space-between
+    
+.vs-bg-navbar
+    --bs-bg-opacity: 1
+    background-color: var(--vs-theme-primary)
+
+.vs-navbar-account 
+    cursor: pointer
+    color: var(--bs-light)
+    display: flex 
+    flex-direction: row 
+    text-decoration: none
+    > span
+        &:first-child
+            display: flex 
+            justify-content: center 
+            align-items: center
+    > span.material-icons 
+        padding-left: 5px
+        font-size: 35px
+    > img 
+        margin-left: 0.5rem
+        height: 35px
+        width: 35px
+        border-radius: 100%
+        &:hover
+            border: 1px solid var(--bs-gray)
+    &:hover
+        > span 
+            color: var(--bs-gray-200)
+
+@media screen and (max-width: 765px)
+    .vs-navbar-account
+        flex-direction: row-reverse
+        justify-content: flex-end
+        > span.material-icons 
+            padding-left: 0 
+            padding-right: 5px
+        > img 
+            margin-left: 0
+            margin-right: 0.5rem
+
