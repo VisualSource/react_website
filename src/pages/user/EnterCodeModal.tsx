@@ -9,15 +9,15 @@ export default function EnterCodeModal({ state,closeHandle}: IModal){
   
     return (
         <Modal show={state} onHide={closeHandle}>
-             <Modal.Header closeButton>
+             <Modal.Header closeButton className="bg-dark text-light">
                 <Modal.Title>Enter Code</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body className="bg-dark text-light">
                 <Form>
                     <Form.Control type="text" placeholder="code"></Form.Control>
                 </Form>
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer className="bg-dark">
             <Button variant="secondary" onClick={closeHandle}>
                 Close
             </Button>

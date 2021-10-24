@@ -2,7 +2,6 @@
 use Firebase\JWT\JWK;
 use Firebase\JWT\JWT;
 
-
 class Auth {
     private static function fetchAndCacheToken() {
         $client = new \GuzzleHttp\Client();
@@ -33,13 +32,13 @@ class Auth {
         return $token["access_token"];
     }
     public static function getManagmentToken() {
-        if(file_exists(__DIR__. "/../cache.json"))
+        if(file_exists(__DIR__ . "/../cache.json"))
         {
             $raw = file_get_contents(__DIR__ . "/../cache.json");
 
             $json = json_decode($raw,true);
 
-            $diff = strtotime($json["fetched"]) - strtotime((new DateTime("NOW"))->format("c"));
+            $diff = strtotime((new DateTime("NOW"))->format("c")) - strtotime($json["fetched"]);
 
             if($diff < 36000) {
                 return $json["token"];

@@ -4,6 +4,7 @@ import { Auth0Provider } from '@auth0/auth0-react';
 import Navbar from './Navbar';
 
 import Routes from './Routes';
+import ErrorBoundary from "./ErrorBoundary";
 
 import {  } from 'bootstrap';
 
@@ -16,9 +17,11 @@ function App() {
       redirectUri={window.location.origin}>
       <Router>
           <Navbar/>
-          <main id="vs-content-warpper">
-            <Routes/>
-          </main>
+          <ErrorBoundary>
+            <main id="vs-content-warpper">
+              <Routes/>
+            </main>
+          </ErrorBoundary>
       </Router>
     </Auth0Provider>
   );

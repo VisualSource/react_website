@@ -1,0 +1,48 @@
+#vs-server-resources 
+    display: flex 
+    flex-direction: column
+    height: calc( 100vh - 61.5px )
+    > #vs-search 
+        margin-top: 1rem
+        display: flex 
+        flex-direction: column
+        justify-content: center
+        align-items: center
+    > article 
+        overflow-y: scroll
+        > div.card 
+            margin: 1rem 0 1rem 0
+.text-indigo
+    color: var(--bs-indigo)
+.text-cyan
+    color: var(--bs-cyan)
+.text-purple
+    color: var(--bs-blue)
+.text-red
+    color: var(--bs-red)
+.vs-serach-param
+    display: flex   
+    margin: 0 0.5rem 0 0.5rem     
+
+#vs-server-no-content 
+    height: calc( 100vh - 61.5px - 110px)
+    display: flex 
+    flex-direction: column
+    justify-content: center
+    align-items: center 
+    align-content: center
+    color: var(--bs-light)  
+#vs-server-spinner
+    height: calc( 100vh - 61.5px - 110px)
+    display: flex 
+    flex-direction: column
+    justify-content: center
+    align-items: center 
+    align-content: center
+
+@media screen and (max-width: 765px)
+    #vs-search-params 
+        display: flex 
+        flex-direction: column
+        > .vs-serach-param 
+            margin-top: 1rem

@@ -12,10 +12,16 @@ interface IProject {
     desc: string;
 }
 
+const noContent = `
+    <div className="vs-project-no-content">
+        <h1>No Content to load</h1>
+    </div>
+`;
+
 export default function Project(){
     const [loading,setLoading] = useState<boolean>(true);
     const { id } = useParams<{id: string}>();
-    const [markdown,setMarkdown] = useState<string>("<div>Failed to load content</div>")
+    const [markdown,setMarkdown] = useState<string>(noContent);
     useEffect(()=>{
         const init = async () => {
             try {

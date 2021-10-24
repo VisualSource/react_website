@@ -2,13 +2,20 @@ import { Switch, Route } from "react-router-dom";
 
 import Home from '../pages/Home';
 import News from '../pages/news/News';
+
 import Projects from '../pages/projects/Projects';
 import Project from "../pages/projects/Project";
-import Services from "../pages/services/Services";
+
 import LoginAndSignUp from '../pages/user/LoginAndSignUp';
 import Account from '../pages/user/Account';
 import EditProfile from "../pages/user/EditProfile";
 import User from "../pages/user/User";
+
+import Services from "../pages/services/Services";
+import ServerResources from "../pages/services/ServerResources";
+
+import Games from "../pages/games/Games";
+import Game from "../pages/games/Game";
 
 export default function Routes(){
     return (
@@ -25,6 +32,9 @@ export default function Routes(){
               <Route path="/services">
                   <Services/>
               </Route>
+              <Route path="/server/resources">
+                  <ServerResources/>
+              </Route>
               <Route path="/signin">
                 <LoginAndSignUp/>
               </Route>
@@ -39,6 +49,12 @@ export default function Routes(){
               </Route>
               <Route path="/project/:id">
                   <Project/>
+              </Route>
+              <Route path="/games">
+                    <Games/>
+              </Route>
+              <Route path="/game/:id">
+                    <Game/>
               </Route>
         </Switch>
     );

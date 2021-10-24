@@ -1,0 +1,71 @@
+@mixin center 
+    display: flex 
+    flex-direction: column 
+    justify-content: center
+    align-content: center 
+    align-items: center
+    
+#vs-user-account
+    height: calc( 100vh - 61.5px )
+    display: grid
+    grid-template-areas: 'data img'
+    color: var(--bs-light)
+    > .vs-user-options
+        grid-area: data
+        @include center 
+        > div 
+            margin-bottom: 0.8rem
+    > .vs-user-figure
+        grid-area: img
+        @include center 
+        > figure > img 
+            border-radius: 100%
+
+
+#account-edit 
+    color: var(--bs-light)
+    height: calc( 100vh - 61.5px )
+    display: flex 
+    flex-direction: column 
+    justify-content: center 
+    align-items: center 
+    align-content: center
+    > #vs-edit-bg
+        height: calc( 100vh - 61.5px )
+    > #vs-edit-form
+        position: absolute
+    > a 
+        position: absolute
+        top: 5rem
+        left: 1rem
+
+#vs-account-login 
+    color: var(--bs-light)
+    height: calc( 100vh - 61.5px )
+    display: flex 
+    flex-direction: column 
+    justify-content: center 
+    align-items: center 
+    align-content: center
+    > main 
+        position: absolute
+        display: flex 
+        flex-direction: column 
+        justify-content: center 
+        align-content: center 
+        align-items: center
+        > h3 
+            margin-bottom: 1rem
+        > div 
+            margin-top: 1rem
+            margin-bottom: 1rem
+    > #vs-singin-bg
+        height: calc( 100vh - 61.5px )
+
+@media screen and (max-width: 765px)
+    #vs-user-account
+        display: flex 
+        flex-direction: column-reverse
+        justify-content: flex-end
+        > .vs-user-figure 
+            margin-top: 1rem

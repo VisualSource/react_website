@@ -19,12 +19,12 @@ interface Project {
 
 function Card({id, image, title= "Project", description = "No Description"}: CardProps){
     return (
-        <div className="card" style={{width: "18rem"}}>
+    <div className="card bg-dark text-light" style={{width: "18rem"}}>
         <img src={image ?? "/resources/projects.webp"} className="card-img-top" alt="project thumbnail"/>
         <div className="card-body">
             <h5 className="card-title">{title}</h5>
             <p className="card-text">{description}</p>
-            <Link to={`/project/${id}`} className="btn btn-primary">View</Link>
+            <Link to={`/project/${id}`} className="btn btn-secondary">View</Link>
         </div>
     </div>
     )
@@ -39,12 +39,22 @@ export default function Projects() {
                 const raw = await fetch(`${process.env.REACT_APP_API}content/projects`);
                 const json = await raw.json();
                 setProjects(json);
+                setLoading(false);
             } catch (error) {
-                
+                console.error(error);
+                setLoading(false);
             }
         }
         init();
     },[]);
+
+    if(loading){
+        return (
+            <div className="loading-container">
+                <Spinner/>
+            </div>
+        );
+    }
 
     return (
         <div id="vs-projects">

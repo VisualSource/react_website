@@ -1,23 +1,23 @@
 {
-    "version": "2.0.0",
+    "version": "2.1.0",
     "games": [
             {
                 "title": "Polytopia Legacy Demo",
                 "description": "A web based version of the game polytopia.",
                 "route":"https://visualsource.000webhostapp.com/games/pt_legacy/index.html",
-                "image":"content/polytopia.webp"
+                "image":"/resources/polytopia.webp"
             },
             {
                 "title": "Polytopia Demo",
                 "description": "A web based version of the game polytopia.",
                 "route":"https://game.visualsource.us",
-                "image":"content/polytopia_demo.webp"
+                "image":"/resources/polytopia_demo.webp"
             },
             {
                 "title": "2048",
                 "description": "A sliding tile puzzle",
                 "route":"https://visualsource.000webhostapp.com/games/2048/index.html",
-                "image": "content/2048.webp"
+                "image": "/resources/2048.webp"
             }
     ],
     "projects": [

@@ -57,6 +57,7 @@ class MinecraftApi {
                         "description" => $item["description"],
                         "icon" => $item["icon"],
                         "state" => $item["state"],
+                        "required" => json_decode($item["required"],true),
                         "images" => json_decode($item["images"],true),
                         "links" => json_decode($item["links"],true),
                         "type" => $item["type"],
@@ -160,7 +161,7 @@ class MinecraftApi {
             }
             case "query":{
                 try {
-                    $Query = new MinecraftPing( 'java.visualsource.us', 25565 );
+                    $Query = new MinecraftPing( 'play.blossomcraft.org', 25565 );
                     $Data = $Query->Query();
 
                     $Favicon = "";

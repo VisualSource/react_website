@@ -9,7 +9,7 @@ import EnterCodeModal from './EnterCodeModal';
 export default function Account() {
     const [modal,setModal] = useState(false);
     const [loading,setLoading] = useState<boolean>(false);
-    const {getAccessTokenSilently,logout, user, isAuthenticated } = useAuth0();
+    const { logout, user, isAuthenticated } = useAuth0();
 
 
     const closeModal = () => setModal(false);
@@ -37,16 +37,16 @@ export default function Account() {
 
     if(!isAuthenticated) {
         return (
-            <Redirect to="/"/>
+            <Redirect to="/signin"/>
         );     
     }
 
     return (
-        <div id="user-account"> 
+        <div id="vs-user-account"> 
 
             <EnterCodeModal state={modal} closeHandle={closeModal} />
 
-            <div>
+            <div className="vs-user-options">
                 <div>
                     <h3>{user?.name}</h3>
                     <hr />
@@ -61,9 +61,9 @@ export default function Account() {
             </div>
 
 
-            <div>
+            <div className="vs-user-figure">
                 <Figure>
-                        <Figure.Image src={user?.picture} alt="user avitor"/>
+                        <Figure.Image height={360} width={360} src={user?.picture} alt="user avitor"/>
                 </Figure>
             </div>
 

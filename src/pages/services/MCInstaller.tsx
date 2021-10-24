@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Git from "../../api/Github";
 import ReactHtmlParser from 'react-html-parser';
+import Spinner from "../../components/Spinner";
 
 export default function MCInstaller(){
     const [loading,setLoading] = useState<boolean>(true);
@@ -28,6 +29,14 @@ export default function MCInstaller(){
         }
         init();
     },[]);
+
+    if(loading){
+        return (
+            <div className="vs-spinner-wrapper">
+                <Spinner/>
+            </div>
+        );
+    }
 
     return (
         <div>

@@ -68,7 +68,7 @@ class Users {
                         case 429:
                             return Response::tooManyRequestResponse();
                         default:
-                            return Response::internalServerErrorResponse();
+                            return Response::badRequestResponse();
                     }
 
 
@@ -83,11 +83,11 @@ class Users {
                 try {
                     if(($request != "GET") || (sizeof($path) < 4)) return Response::badRequestResponse();
 
-                    $auth = Auth::process();
+                    //$auth = Auth::process();
 
                     //Has Bearer Token in header and is vaild
                     // does token sub mach provieded sub
-                    if(!$auth["valid"]) return Response::unauthorizedResponse();
+                    //if(!$auth["valid"]) return Response::unauthorizedResponse();
                 
                     $token = Auth::getManagmentToken();
                     $client = new \GuzzleHttp\Client();
@@ -114,7 +114,7 @@ class Users {
                         case 429:
                             return Response::tooManyRequestResponse();
                         default:
-                            return Response::internalServerErrorResponse();
+                            return Response::badRequestResponse();
                     }
 
 

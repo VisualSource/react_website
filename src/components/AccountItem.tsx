@@ -3,7 +3,6 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 export default function AccountItem(){
     const { isAuthenticated, user } = useAuth0();
-    console.log(user);
     return (
         <Link className="vs-navbar-account" to={isAuthenticated ? "account" : "signin"}>
              <span>{isAuthenticated ? "Account" : "Sign in"}</span>

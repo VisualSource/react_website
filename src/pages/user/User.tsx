@@ -2,22 +2,45 @@ import { useEffect, useState } from 'react';
 import {Figure} from 'react-bootstrap';
 import Spinner from '../../components/Spinner';
 import { useParams } from 'react-router-dom';
+
+
+
 interface IUser {
-    picture: string;
-    sub: string;
-    name: string;
-    user_metadata: {}
+  name: string;
+  picture: string;
+  user_id: string;
+  user_metadata: Usermetadata;
 }
+interface Usermetadata {
+  color: string;
+  friends: any[];
+}
+
 
 export default function User(){
     const [loading,setLoading] = useState(true);
-    const [user, setUser ] = useState<IUser>({ picture: "", sub: "", name: "", user_metadata: {} });
+    const [user, setUser ] = useState<IUser>({ picture: "", user_id: "", name: "", user_metadata: { color: "red", friends: [] } });
     const { sub } = useParams<{ sub: string }>();
 
     useEffect(()=>{
         const init = async () => {
             try {
-                const data: IUser = await (await fetch(`${process.env.REACT_APP_API}/users/get/${sub}`)).json();
+                setLoading(true);
+
+                if(sub.length <= 0) throw new Error("Sub is empty or invaild");
+                
+                if(user.user_id === sub) {
+                    setLoading(false);
+                    return;
+                }
+
+                const raw = await fetch(`${process.env.REACT_APP_API}users/get/${sub}`);
+                
+                if(!raw.ok){
+                    throw new Error("Failed to fetch user");
+                }
+                const data: IUser = await raw.json();
+
                 setUser(data);
                 setLoading(false);
             } catch (error) {
@@ -26,7 +49,7 @@ export default function User(){
             }
         }
         init();
-    },[sub]);
+    },[sub,user.user_id]);
 
     if(loading){
         return (
@@ -37,13 +60,22 @@ export default function User(){
     }
 
     return (
-        <div id="user">
-            <h1>{user.name}</h1>
-            <hr/>
-            <Figure>
-                <Figure.Image src={user.picture} alt="user avitar"/>
-                <Figure.Caption>{user.sub}</Figure.Caption>
-            </Figure>
+        <div id="vs-user-account">
+
+            <div className="vs-user-options">
+                <div>
+                    <h3>{user?.name}</h3>
+                    <hr />
+                    <span>{user?.user_id}</span>
+                </div>
+            </div>
+
+            <div className="vs-user-figure">
+                <Figure>
+                    <Figure.Image height={360} width={360} src={user?.picture} alt="user avitor"/>
+                </Figure>
+            </div>
+            
         </div>
     );
 }

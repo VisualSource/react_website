@@ -1,25 +1,32 @@
 import { Form, Button } from 'react-bootstrap';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
+import Particles from "react-tsparticles";
+import {config} from '../../api/PartialConfig';
 
 export default function EditProfile() {
     const { isAuthenticated, user } = useAuth0();
 
+    const particlesInit = (main: any) => {};
+    const particlesLoaded = (container: any) => {};
+
     const submit = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
-        const data = new FormData(event.target as HTMLFormElement);
-        console.log(data.getAll("name"));
+       // const data = new FormData(event.target as HTMLFormElement);
+        
     }
 
     if(!isAuthenticated) {
         return (
-            <Redirect to="/"/>
+            <Redirect to="/signin"/>
         );
     }
 
     return (
         <div id="account-edit">
-            <Form onSubmit={submit}>
+            <Link className="btn btn-secondary" to="/account">Back</Link>
+            <Particles id="vs-edit-bg" init={particlesInit} loaded={particlesLoaded} options={config}/>
+            <Form onSubmit={submit} id="vs-edit-form">
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control type="email" placeholder="Enter email" name="email" defaultValue={user?.email}/>
@@ -37,7 +44,7 @@ export default function EditProfile() {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" name="password"/>
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <Button variant="success" type="submit">
                     Submit
                 </Button>
             </Form>
