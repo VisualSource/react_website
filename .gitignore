@@ -8,6 +8,8 @@
 /server/vendor
 /server/composer.phar
 /server/public_html/games
+/server/.env
+/server/.env.production
 
 # testing
 /coverage
