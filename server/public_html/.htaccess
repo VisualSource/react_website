@@ -3,7 +3,10 @@
 php_value display_errors 1
 # DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES ABOVE HTID:18527550:
 
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
+#https://gist.github.com/RaVbaker/2254618
+RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ index.php [L,QSA]
+
+ErrorDocument 404 /404.min.html

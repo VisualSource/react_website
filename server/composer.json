@@ -5,7 +5,9 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "VisualSource\\": "api/"
+            "VisualSource\\Controller\\":"app/VisualSource/controllers",
+            "VisualSource\\Service\\":"app/VisualSource/services",
+            "VisualSource\\Exception\\":"app/VisualSource/Exception"
         }
     },
     "authors": [
@@ -18,7 +20,10 @@
         "vlucas/phpdotenv": "2.4",
         "xpaw/php-minecraft-query": "4.0",
         "guzzlehttp/guzzle": "^7.3",
-        "firebase/php-jwt": "^5.4"
+        "firebase/php-jwt": "^5.4",
+        "league/route": "^5.1",
+        "laminas/laminas-diactoros": "^2.8",
+        "laminas/laminas-httphandlerrunner": "^2.1"
     },
     "scripts": {
         "start":"php -S localhost:8000 -t ./public_html/ index.php"

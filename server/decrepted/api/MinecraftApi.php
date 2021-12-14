@@ -11,19 +11,23 @@ use xPaw\MinecraftPingException;
  *      GET /api/minecraft/datapacks/active 
  *      GET /api/minecraft/datapacks/rejected 
  *      GET /api/minecraft/datapacks/admited 
+ *      GET /api/minecraft/datapacks/removed
  * GET /api/minecraft/plugins
  *      GET /api/minecraft/plugins/active 
  *      GET /api/minecraft/plugins/rejected 
  *      GET /api/minecraft/plugins/admited 
+ *      GET /api/minecraft/plugins/removed
  * GET /api/minecraft/resourcepacks
  *      GET /api/minecraft/resourcepacks/active 
  *      GET /api/minecraft/resourcepacks/rejected 
  *      GET /api/minecraft/resourcepacks/admited 
+ *      GET /api/minecraft/resourcepacks/removed
  *
  * GET /api/minecraft/mods
  *      GET /api/minecraft/mods/active 
  *      GET /api/minecraft/mods/rejected 
  *      GET /api/minecraft/mods/admited 
+ *      GET /api/minecraft/mods/removed
  * 
  * Returns the data for the minecraft maps images
  * GET /api/minecraft/maps
@@ -33,6 +37,7 @@ use xPaw\MinecraftPingException;
  *      GET /api/minecraft/all/active
  *      GET /api/minecraft/all/rejected
  *      GET /api/minecraft/all/admited
+ *      GET /api/minecraft/all/removed
  * 
  * GET /api/minecraft/query
  */

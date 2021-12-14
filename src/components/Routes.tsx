@@ -15,7 +15,6 @@ import Services from "../pages/services/Services";
 import ServerResources from "../pages/services/ServerResources";
 
 import Games from "../pages/games/Games";
-import Game from "../pages/games/Game";
 
 export default function Routes(){
     return (
@@ -52,9 +51,6 @@ export default function Routes(){
               </Route>
               <Route path="/games">
                     <Games/>
-              </Route>
-              <Route path="/game/:id">
-                    <Game/>
               </Route>
         </Switch>
     );
