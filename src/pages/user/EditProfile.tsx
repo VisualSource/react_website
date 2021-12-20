@@ -1,6 +1,6 @@
 import { Form, Button } from 'react-bootstrap';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Redirect, Link } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 import Particles from "react-tsparticles";
 import {config} from '../../api/PartialConfig';
 
@@ -18,7 +18,7 @@ export default function EditProfile() {
 
     if(!isAuthenticated) {
         return (
-            <Redirect to="/signin"/>
+            <Navigate to="/signin" replace/>
         );
     }
 

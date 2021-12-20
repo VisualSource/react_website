@@ -1,4 +1,4 @@
-import MCServer from "./MCServer";
+import MCServer from "./mcserver/MCServer";
 import MCInstaller from "./MCInstaller";
 
 import {Tabs, Tab} from 'react-bootstrap';

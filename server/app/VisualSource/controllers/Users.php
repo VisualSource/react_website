@@ -63,7 +63,7 @@ class Users {
 
             $token = $this->getManagmentToken();
 
-            $response = $client->request('GET', "https://visualsource.auth0.com/api/v2/users/" . $args["id"] . "?fields=name%2Cuser_id%2Cpicture%2Cuser_metadata&include_fies=true",
+            $response = $client->request('GET', "https://visualsource.auth0.com/api/v2/users/" . urldecode($args["id"]) . "?fields=name%2Cuser_id%2Cpicture%2Cuser_metadata&include_fies=true",
                             [
                                 'headers'  => [
                                     'authorization' => "Bearer " . $token

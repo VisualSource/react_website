@@ -8,6 +8,14 @@ use xPaw\MinecraftPingException;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Laminas\Diactoros\Response\JsonResponse;
+use Laminas\Diactoros\Response;
+use League\Route\Http\Exception\BadRequestException;
+use VisualSource\Exception\InternalServerErrorException;
+
+
+function hasProp($obj,$key): bool {
+    return property_exists((object) $obj,$key);
+}
 
 class Minecraft {
     private function getDB(){
@@ -170,6 +178,92 @@ class Minecraft {
     }
     public function plugins(ServerRequestInterface $req, array $args): array {
         return $this->getResource("plugin",$args);
+    }
+    public function resourceEdit(ServerRequestInterface $req, array $args) : ResponseInterface {
+
+        $json = file_get_contents('php://input');
+
+        if(empty($json) || empty($args["id"])) throw new BadRequestException;
+
+        $data = json_decode($json,true);
+
+        $updateData = [
+            "query" => [],
+            "data" => []
+        ];
+
+        foreach($data as $key => $value) {
+            switch ($key) {
+                case "name":
+                case "description":
+                case "icon":
+                case "state":
+                case "type":
+                    array_push($updateData["query"],$key . " = ?");
+                    array_push($updateData["data"],$value);
+                    break;
+                case "images":
+                case "links":
+                case "required":
+                    array_push($updateData["query"],$key . " = ?");
+                    array_push($updateData["data"],json_encode($value));
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        $updateProps = join(",",$updateData["query"]);
+        $updates = count($updateData["query"]);
+
+        array_push($updateData["data"],$args["id"]);
+
+        $db = $this->getDB();
+        $query = $db->prepare("UPDATE server_resources SET " . $updateProps .  " WHERE id = ?;");
+
+        if(!$query->execute($updateData["data"])) throw new InternalServerErrorException;
+        
+        return new Response("No Content",204);
+    }
+    public function resourceDelete(ServerRequestInterface $req, array $args) : ResponseInterface {
+
+        if(empty($args["id"])) throw new BadRequestException;
+
+        $db = $this->getDB();
+
+        $query = $db->prepare("DELETE FROM server_resources WHERE id = ?");
+
+        if(!$query->execute(array( $args["id"] ))) throw new InternalServerErrorException;
+
+        return new Response("No Content",204);
+    }
+    public function resourceCreate(ServerRequestInterface $req) : ResponseInterface {
+
+        $json = file_get_contents('php://input');
+      
+        if(empty($json)) throw new BadRequestException;
+
+        $data = json_decode($json,true);
+
+        if( 
+            !hasProp($data,'name') || 
+            !hasProp($data,'description') || 
+            !hasProp($data,'icon') || 
+            !hasProp($data,'state') || 
+            !hasProp($data,'links') || 
+            !hasProp($data,'required') || 
+            !hasProp($data,'type')
+        ) throw new BadRequestException;
+
+        $db = $this->getDB();
+
+        $query = $db->prepare("INSERT INTO server_resources ( name, description, icon, state, images, links, required, type ) VALUES (?,?,?,?,?,?,?,?);");
+
+        if(!$query->execute(array( 
+            $data["name"], $data["description"], $data["icon"], $data["state"], json_encode(array()), json_encode($data["links"]), json_encode($data["required"]), $data["type"]
+           ))) throw new InternalServerErrorException;
+    
+        return new Response('Created',201);
     }
 } 
 

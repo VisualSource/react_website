@@ -1,7 +1,7 @@
 import {useAuth0} from '@auth0/auth0-react';
 import { useEffect, useState } from 'react';
 import { Figure, ButtonGroup, Button } from 'react-bootstrap';
-import { Redirect, Link } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 import Spinner from '../../components/Spinner';
 
 import EnterCodeModal from './EnterCodeModal';
@@ -9,7 +9,7 @@ import EnterCodeModal from './EnterCodeModal';
 export default function Account() {
     const [modal,setModal] = useState(false);
     const [loading,setLoading] = useState<boolean>(false);
-    const { logout, user, isAuthenticated } = useAuth0();
+    const { logout, user, isAuthenticated, isLoading } = useAuth0();
 
 
     const closeModal = () => setModal(false);
@@ -17,29 +17,25 @@ export default function Account() {
     useEffect(()=>{
         const init = async () => {
             try {
-                
-                setLoading(false);
+                setLoading(isLoading);
             } catch (error) {
                 setLoading(false);
             }
         }
         init();
-    },[]);
+    },[isLoading]);
 
 
-    if(loading) {
-        return (
-            <div className="loading-container">
-                <Spinner/>
-            </div>
-        );
-    }
+    if(loading) return (
+        <div className="loading-container">
+             <Spinner/>
+        </div>
+    );
+    
 
-    if(!isAuthenticated) {
-        return (
-            <Redirect to="/signin"/>
-        );     
-    }
+    if(!isAuthenticated) return (
+        <Navigate to="/signin" replace/>
+    );
 
     return (
         <div id="vs-user-account"> 

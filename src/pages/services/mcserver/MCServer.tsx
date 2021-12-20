@@ -3,8 +3,9 @@ import {Dropdown, DropdownButton, Image} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
 import InnerImageZoom from 'react-inner-image-zoom';
-import Spinner from '../../components/Spinner';
+import Spinner from '../../../components/Spinner';
 import { motdParser } from '@sfirew/mc-motd-parser';
+import { useMetadata } from '../../../api/useMetadata';
 interface IMaps {
     Overworld: string;
     Nether: string;
@@ -34,7 +35,7 @@ export default function MCServer(){
     const [loading,setLoading] = useState<boolean>(true);
     const [selectedMap,setSelectedMap] = useState<string>("Overworld");
     const [server,setServer] = useState<IServer>({description: {text:"Server MOTD"}, players: {max: 0, online: 0, users: []}, version: ["1.17.0"], favicon: ""});
-
+    const auth = useMetadata();
     useEffect(()=>{
         const init = async () => {
             try {
@@ -58,7 +59,7 @@ export default function MCServer(){
         init();
     },[]);
 
-    if(loading) {
+    if(loading || auth.isLoading) {
         return (
             <div className="vs-spinner-wrapper">
                 <Spinner/>
@@ -89,6 +90,9 @@ export default function MCServer(){
                 <Link className="btn btn-secondary" to="/server/resources?type=datapacks">View Datapacks</Link>
                 <Link className="btn btn-secondary" to="/server/resources?type=resource-packs">View Resource Packs</Link>
                 <Link className="btn btn-secondary" to="/server/resources?type=mods">View Mods</Link>
+                {
+                    auth.appdata?.minecraft === "server_admin" ? <Link className="btn btn-secondary" to="/server/resources/admin">Admin View</Link> : null
+                }
             </div>
             <div id="vs-server-map">
                 <div id="vs-map-wrapper">

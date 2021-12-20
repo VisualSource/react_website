@@ -22,6 +22,11 @@ class ContentApi {
         $response->getBody()->write(json_encode($data[$part]));
         
         $response = $response->withHeader("Content-Type","application/json");
+
+        if($_SERVER["SERVER_ENV"] == "develepment") {
+            $response = $response->withHeader("Access-Control-Allow-Origin","*");
+        }
+
         return $response;
     }
     public function all(ServerRequestInterface $request): ResponseInterface {

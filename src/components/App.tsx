@@ -3,7 +3,7 @@ import { Auth0Provider } from '@auth0/auth0-react';
 
 import Navbar from './Navbar';
 
-import Routes from './Routes';
+import RoutesPaths from './Routes';
 import ErrorBoundary from "./ErrorBoundary";
 
 import {  } from 'bootstrap';
@@ -11,15 +11,16 @@ import {  } from 'bootstrap';
 function App() {
   return (
     <Auth0Provider 
-      scope="update:users update:users_app_metadata"
-      domain="visualsource.auth0.com"
-      clientId="6c6YuGZXmG2Z33zyAKM1pR546vj85Ca1"
+      scope="read:users update:current_user_metadata read:current_user read:current_user_metadata"
+      domain={process.env.REACT_APP_AUTH0_DOMAIN}
+      clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}
+      audience={process.env.REACT_APP_AUTH0_AUDIENCE}
       redirectUri={window.location.origin}>
       <Router>
           <Navbar/>
           <ErrorBoundary>
             <main id="vs-content-warpper">
-              <Routes/>
+              <RoutesPaths/>
             </main>
           </ErrorBoundary>
       </Router>

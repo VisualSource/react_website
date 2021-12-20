@@ -1,5 +1,16 @@
 # Website News 
 
+## Update 3.2.0 12/20/2021
+
+### `Fixes` 
+- None
+
+### `Changes`
+- Better loading pages
+- Better auth
+
+### `New`
+- Error page
 ## Update 3.1.0 10/24/2021 
 
 ### `Fixes` 

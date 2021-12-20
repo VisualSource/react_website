@@ -9,7 +9,7 @@ function NavItem(props: {
 }) {
   return (
     <li className="nav-item">
-      <NavLink className="nav-link" exact={props.exact ?? false} to={props.route} activeClassName="active">{props.title}</NavLink>
+      <NavLink end={props.exact ?? false} to={props.route} className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}>{props.title}</NavLink>
     </li>
   );
 }

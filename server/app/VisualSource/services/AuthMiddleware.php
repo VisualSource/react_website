@@ -81,6 +81,12 @@ class AuthMiddleware implements MiddlewareInterface {
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         try {
+           if($_SERVER["SERVER_ENV"] == "develepment") {
+                $request->user = [
+                    "iss" => ""
+                ];
+                return $handler->handle($request);
+           }
            $auth_token = $this->getHeader($request->getServerParams());
 
            if(!isset($token)) throw new UnauthorizedException();

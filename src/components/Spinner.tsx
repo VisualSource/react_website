@@ -7,3 +7,11 @@ export default function Spinner(){
         </div>
     );
 } 
+
+export function SpinnerWrapper(){
+    return (
+        <div className="vs-spinner-wrapper">
+            <Spinner/>
+        </div>
+    )
+}

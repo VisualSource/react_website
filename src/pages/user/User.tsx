@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {Figure} from 'react-bootstrap';
 import Spinner from '../../components/Spinner';
 import { useParams } from 'react-router-dom';
+import ErrorPage from '../errors/ErrorPage';
 
 
 
@@ -19,6 +20,7 @@ interface Usermetadata {
 
 export default function User(){
     const [loading,setLoading] = useState(true);
+    const [hasError,setError] = useState(false);
     const [user, setUser ] = useState<IUser>({ picture: "", user_id: "", name: "", user_metadata: { color: "red", friends: [] } });
     const { sub } = useParams<{ sub: string }>();
 
@@ -27,7 +29,7 @@ export default function User(){
             try {
                 setLoading(true);
 
-                if(sub.length <= 0) throw new Error("Sub is empty or invaild");
+                if(!sub || (sub && sub.length <= 0)) throw new Error("Sub is empty or invaild");
                 
                 if(user.user_id === sub) {
                     setLoading(false);
@@ -46,6 +48,7 @@ export default function User(){
             } catch (error) {
                 console.log(error);
                 setLoading(false);
+                setError(true);
             }
         }
         init();
@@ -58,6 +61,8 @@ export default function User(){
             </div>
         );
     }
+
+    if(hasError) return <ErrorPage error={404}/>
 
     return (
         <div id="vs-user-account">
