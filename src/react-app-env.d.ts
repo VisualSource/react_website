@@ -14,6 +14,41 @@ declare namespace NodeJS {
 }
 
 declare module 'github-api' {
+    export interface ReleasesItem {
+        browser_download_url: string;
+        content_type: string;
+        created_at: string;
+        download_count: number;
+        id: number;
+        label: string;
+        name: string;
+        node_id: string;
+        url: string;
+        size: number;
+        state: string;
+    }
+
+    export interface Release {
+        assets: ReleasesItem[],
+        assets_url: string;
+        author: {},
+        body: string, 
+        created_at: string,
+        draft: boolean;
+        html_url: string;
+        id: number;
+        name: string;
+        node_id: string;
+        prerelease: boolean;
+        published_at: string;
+        tag_name: string;
+        tarball_url: string;
+        target_commitish: string;
+        upload_url: string;
+        url: string;
+        zipball_url: string;
+    }
+
     interface Gist {}
     interface Issue {}
     interface Markdown {
@@ -22,42 +57,11 @@ declare module 'github-api' {
     interface Organization {}
     interface Project {}
     interface RateLimit {}
-    interface Repository {
+    export interface Repository {
         getReadme: (ref: string, raw: boolean, cb?: Function) => Promise<any>;
         listReleases: (cb?: string) => Promise<{
             config:{},
-            data: {
-                assets: {
-                    browser_download_url: string;
-                    content_type: string;
-                    created_at: string;
-                    download_count: number;
-                    id: number;
-                    label: string;
-                    name: string;
-                    node_id: string;
-                    url: string;
-                    size: number;
-                    state: string;
-                }[],
-                assets_url: string;
-                author: {},
-                body: string, 
-                created_at: string,
-                draft: boolean;
-                html_url: string;
-                id: number;
-                name: string;
-                node_id: string;
-                prerelease: boolean;
-                published_at: string;
-                tag_name: string;
-                tarball_url: string;
-                target_commitish: string;
-                upload_url: string;
-                url: string;
-                zipball_url: string;
-            }[],
+            data: Release[],
             headers: {
                 [key: string]: string
             },

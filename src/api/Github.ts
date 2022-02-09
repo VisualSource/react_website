@@ -5,9 +5,7 @@ export default class Git {
     static Instance(){
         if(GIT_INSTANCE) return GIT_INSTANCE;
         
-        GIT_INSTANCE = new GitHub({
-            token: process.env.REACT_APP_AUTH_GITHUB
-        });
+        GIT_INSTANCE = new GitHub();
 
         return GIT_INSTANCE;
     }

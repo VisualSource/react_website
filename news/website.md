@@ -1,6 +1,17 @@
 # Website News 
 
-## Update 3.3.0 2/8/2023 
+## Update 3.4.0 2/9/2022
+
+### `Fixes` 
+- Github api
+- invaild image url in index html
+### `Changes`
+- switch McInstaller to Rusty Minecraft Launcher
+- make Rusty Minecraft Launcher page look better
+### `New`
+- None
+
+## Update 3.3.0 2/8/2022 
 ### `Fixes` 
 - React: no ul under p 
 
