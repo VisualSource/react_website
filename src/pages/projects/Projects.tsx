@@ -20,7 +20,7 @@ interface Project {
 function Card({id, image, title= "Project", description = "No Description"}: CardProps){
     return (
     <div className="card bg-dark text-light" style={{width: "18rem"}}>
-        <img src={image ?? "/resources/projects.webp"} className="card-img-top" alt="project thumbnail"/>
+        <img src={image ?? "/images/projects.webp"} className="card-img-top" alt="project thumbnail"/>
         <div className="card-body">
             <h5 className="card-title">{title}</h5>
             <p className="card-text">{description}</p>

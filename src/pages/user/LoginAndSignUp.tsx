@@ -9,12 +9,12 @@ export default function LoginOrSignUp (){
         <div id="vs-account-login">
             <Particles id="vs-singin-bg" options={config}/>
             <main>
-                <h3>Login or Signup to continue</h3>
-                <button className="btn btn-secondary" onClick={()=>loginWithRedirect({screen_hint: "signup"})}>Sign up</button>
+                <h2>Login or Signup to continue</h2>
                 <div>
-                    <h5>Or</h5>
+                    <button className="btn btn-secondary" onClick={()=>loginWithRedirect({screen_hint: "signup"})}>Sign up</button>
+                    <h5>or</h5>
+                    <button className="btn btn-secondary" onClick={()=>loginWithRedirect()}>Login</button>
                 </div>
-                <button className="btn btn-secondary" onClick={()=>loginWithRedirect()}>Login</button>
             </main>
         </div>
     );

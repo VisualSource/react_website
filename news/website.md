@@ -1,5 +1,17 @@
 # Website News 
 
+## Update 3.3.0 2/8/2023 
+### `Fixes` 
+- React: no ul under p 
+
+### `Changes`
+- particals
+- moved site from 000webhost to herkuo
+- move images location /resource -> /images
+
+### `New`
+- Issue report page under /report
+- new backend
 ## Update 3.2.0 12/20/2021
 
 ### `Fixes` 

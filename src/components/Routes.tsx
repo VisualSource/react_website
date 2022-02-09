@@ -18,6 +18,8 @@ import Games from "../pages/games/Games";
 import AdminPage from "../pages/services/mcserver/AdminPage";
 import ErrorPage from "../pages/errors/ErrorPage";
 
+import BugReport from "../pages/bug/BugReport";
+
 export default function RoutesPaths(){
     return (
         <Routes>
@@ -33,6 +35,7 @@ export default function RoutesPaths(){
             <Route path="/user/:sub" element={<User/>}/>
             <Route path="/project/:id" element={ <Project/>}/>
             <Route path="/games" element={<Games/>}/>
+            <Route path="/report" element={<BugReport/>}/>
             <Route path="*" element={<ErrorPage error={404}/>} />
         </Routes>
     );

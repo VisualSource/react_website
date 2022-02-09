@@ -13,14 +13,14 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-if(process.env.NODE_ENV === "production" && 'serviceWorker' in navigator) {
+/*if(process.env.NODE_ENV === "production" && 'serviceWorker' in navigator) {
     navigator.serviceWorker.register("/sw.js",{scope:"/"})
     .then(req=>{
       console.log("Registration succeeded");
     }).catch(error=>{
       console.error("Registration Failed");
     });
-}
+}*/
 
 
 // If you want to start measuring performance in your app, pass a function

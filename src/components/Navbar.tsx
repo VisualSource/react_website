@@ -19,7 +19,7 @@ export default function Navbar(){
         <nav className="navbar navbar-expand-lg navbar-dark vs-bg-navbar">
           <div className="container-fluid">
             <Link className="navbar-brand" to="/">
-              <img src="/resources/logo.webp" alt="" width="120" height="34"/>
+              <img src="/images/logo.webp" alt="logo" width="120" height="34"/>
             </Link>
             <button id="nav-menu" className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>

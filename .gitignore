@@ -4,15 +4,16 @@
 /node_modules
 /.pnp
 .pnp.js
+/scripts
 
 /server/vendor
 /server/composer.phar
-/server/public_html/games
 /server/.env
 /server/.env.production
 
 # testing
 /coverage
+/server
 
 # production
 /build

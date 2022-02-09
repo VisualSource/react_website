@@ -2,8 +2,8 @@ import Particles from "react-tsparticles";
 import {config} from '../api/PartialConfig';
 
 export default function Home(){
-    const particlesInit = (main: any) => {};
-    const particlesLoaded = (container: any) => {};
+    const particlesInit = async (main: any): Promise<void> => {};
+    const particlesLoaded = async (container: any): Promise<void> => {};
     return (
         <div id="vs-home">
           <span>

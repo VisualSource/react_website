@@ -7,8 +7,8 @@ import {config} from '../../api/PartialConfig';
 export default function EditProfile() {
     const { isAuthenticated, user } = useAuth0();
 
-    const particlesInit = (main: any) => {};
-    const particlesLoaded = (container: any) => {};
+    const particlesInit = async (main: any) => {};
+    const particlesLoaded = async (container: any) => {};
 
     const submit = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault();

@@ -1,8 +1,0 @@
-admited
-rejected
-active
-
-plugin
-mod
-datapack
-resourcepack
